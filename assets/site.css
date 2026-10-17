@@ -186,8 +186,9 @@ strong { font-weight: 600; color: var(--navy); }
 
 /* Product screenshot */
 .showcase { padding-bottom: 8px; }
-.shot { margin: 0 auto; max-width: 880px; }
-.shot picture { display: block; border: 1px solid var(--rule-strong); border-radius: 6px; overflow: hidden; background: var(--paper); box-shadow: 0 1px 0 rgba(20, 44, 57, 0.04), 0 28px 56px -28px rgba(20, 44, 57, 0.32); }
+.shot { margin: 0; }
+/* The screenshot fades into the page on the right and at the bottom (built into the image), so no frame. */
+.shot picture { display: block; border-radius: 8px 0 0 0; overflow: hidden; }
 .shot img { width: 100%; }
 .shot figcaption { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--quiet); }
 .works { margin: 40px 0 0; padding-top: 22px; border-top: 1px solid var(--rule); font-size: 0.95rem; color: var(--quiet); }
