@@ -19,9 +19,9 @@
 <meta name="color-scheme" content="light">
 <link rel="icon" type="image/png" sizes="64x64" href="../assets/media/favicon-64.png">
 <link rel="apple-touch-icon" href="../assets/media/apple-touch-icon.png">
-<link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/site.css?v=13515a711a">
+<link rel="preload" href="../assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css?v=3fa2e82058">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -32,36 +32,38 @@
       <span class="wordmark">Inqerio</span>
     </a>
     <nav class="top-nav" aria-label="Main"><a href="../">Product</a><a href="../pricing/">Pricing</a><a href="../privacy/">Privacy</a><a href="../contact/" aria-current="page">Contact</a></nav>
-    <a class="btn btn-sm" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a>
+    <a class="btn btn-sm top-cta" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a>
+    <details class="menu">
+      <summary aria-label="Menu"><span></span><span></span><span></span></summary>
+      <nav class="menu-panel" aria-label="Menu"><a href="../">Product</a><a href="../pricing/">Pricing</a><a href="../privacy/">Privacy</a><a href="../contact/" aria-current="page">Contact</a><a class="btn btn-block" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a></nav>
+    </details>
   </div>
 </header>
 <main id="main" class="page-contact">
 
 <section class="page-head"><div class="wrap">
-    <p class="eyebrow">Support</p>
     <h1>Contact us</h1>
     <p class="lead">For help with the app, your account, a subscription or the beta, write to us.</p>
   </div></section>
 <section class="section section-tight">
-  <div class="wrap contact-grid">
-    <div class="contact-card">
-      <span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
-      <h2>Email support</h2>
-      <p>The quickest way to reach us about anything.</p>
-      <p><a class="btn" href="mailto:support@inqerio.com">support@inqerio.com</a></p>
-      <p class="small">Include the app’s version number and, for account questions, the email address you sign in with. Please don’t send passwords, card numbers or participant data.</p>
-    </div>
-    <div class="contact-card">
-      <span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
-      <h2>Payments and receipts</h2>
-      <p>Payments are handled by Stripe as reseller. For a question about a charge you can also use the support link in your Stripe receipt.</p>
-      <p><a class="link-arrow" href="../refunds/">Refunds and cancelling <svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p>
-    </div>
-    <div class="contact-card">
-      <span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg></span>
-      <h2>Who we are</h2>
-      <p>Inqerio is made by CodeSculpt, Ottawa, Ontario, Canada.</p>
-      <p><a class="link-arrow" href="../privacy/">Privacy policy <svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <h2>Email support</h2>
+        <p>The quickest way to reach us about anything.</p>
+        <p><a class="btn" href="mailto:support@inqerio.com">support@inqerio.com</a></p>
+        <p class="small">Include the app’s version number and, for account questions, the email address you sign in with. Please don’t send passwords, card numbers or participant data.</p>
+      </div>
+      <div>
+        <h2>Payments and receipts</h2>
+        <p>Payments are handled by Stripe as reseller. For a question about a charge you can also use the support link in your Stripe receipt.</p>
+        <p><a href="../refunds/">Refunds and cancelling</a></p>
+      </div>
+      <div>
+        <h2>Who we are</h2>
+        <p>Inqerio is made by CodeSculpt, Ontario, Canada.</p>
+        <p><a href="../privacy/">Privacy policy</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -74,7 +76,6 @@
           <img src="../assets/brand/mark-colour.png" alt="" width="19" height="35">
           <span class="wordmark">Inqerio</span>
         </a>
-        <p class="descriptor">Your intelligent research workspace</p>
         <p class="foot-tag">Where research comes together.</p>
       </div>
       <nav aria-label="Product">
@@ -97,10 +98,10 @@
     </div>
     <div class="foot-base">
       <div class="made">
-        <img src="../assets/brand/crest-black.png" alt="" width="34" height="32">
-        <p>Made by <strong>CodeSculpt</strong> in Ottawa, Ontario, Canada</p>
+        <img src="../assets/brand/crest-black.png" alt="" width="30" height="28">
+        <p>Made by <strong>CodeSculpt</strong> in Ontario, Canada</p>
       </div>
-      <p>© 2026 CodeSculpt. All rights reserved.</p>
+      <p>© 2026 CodeSculpt</p>
     </div>
   </div>
 </footer>

@@ -19,9 +19,9 @@
 <meta name="color-scheme" content="light">
 <link rel="icon" type="image/png" sizes="64x64" href="./assets/media/favicon-64.png">
 <link rel="apple-touch-icon" href="./assets/media/apple-touch-icon.png">
-<link rel="preload" href="./assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="./assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/site.css?v=13515a711a">
+<link rel="preload" href="./assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./assets/fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="./assets/site.css?v=3fa2e82058">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -32,7 +32,11 @@
       <span class="wordmark">Inqerio</span>
     </a>
     <nav class="top-nav" aria-label="Main"><a href="./" aria-current="page">Product</a><a href="./pricing/">Pricing</a><a href="./privacy/">Privacy</a><a href="./contact/">Contact</a></nav>
-    <a class="btn btn-sm" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a>
+    <a class="btn btn-sm top-cta" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a>
+    <details class="menu">
+      <summary aria-label="Menu"><span></span><span></span><span></span></summary>
+      <nav class="menu-panel" aria-label="Menu"><a href="./" aria-current="page">Product</a><a href="./pricing/">Pricing</a><a href="./privacy/">Privacy</a><a href="./contact/">Contact</a><a class="btn btn-block" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a></nav>
+    </details>
   </div>
 </header>
 <main id="main" class="page-home">
@@ -43,65 +47,55 @@
       <img src="./assets/brand/logo-colour.png" alt="Inqerio: Your intelligent research workspace" width="380" height="246">
     </div>
     <div class="hero-text">
-      <p class="pill"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg> Now in beta for Windows</p>
       <h1>Where research comes together.</h1>
       <p class="lead">Write the manuscript, manage references, run systematic searches, analyse data and prepare ethics in one desktop app, with AI that helps and never takes over.</p>
-      <p class="actions"><a class="btn btn-lg" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta <svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><a class="btn btn-ghost btn-lg" href="./pricing/">See plans and prices</a></p>
-      <ul class="assure">
-        <li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> Your files stay on your computer</li>
-        <li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 4.2A10 10 0 0 1 12 4c7 0 10 8 10 8a17 17 0 0 1-2.2 3.4"/><path d="M6.6 6.6A16 16 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="m2 2 20 20"/></svg> No usage tracking</li>
-        <li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Free to start, no account needed</li>
-      </ul>
+      <p class="actions"><a class="btn btn-lg" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a><a class="btn btn-ghost btn-lg" href="./pricing/">See plans and prices</a></p>
+      <p class="hero-note">Now in beta for Windows. Free to start, no account needed, and your files stay on your computer.</p>
     </div>
   </div>
 </section>
-<section class="showcase" aria-label="Inqerio on screen">
+<section class="showcase" aria-label="Writing in Inqerio">
   <div class="wrap">
-    <figure class="window">
-      <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-      <img src="./assets/media/app-editor-1200.webp" srcset="./assets/media/app-editor-1200.webp 1200w, ./assets/media/app-editor-2400.webp 2400w" sizes="(max-width: 1180px) 100vw, 1120px" width="1200" height="717" alt="The Inqerio editor: a project's files on the left, a manuscript with citations in the middle, and comments and the AI collaborator on the right." loading="eager">
+    <figure class="shot">
+      <picture>
+        <source media="(max-width: 720px)" srcset="./assets/media/app-page-900.webp" width="900" height="647">
+        <img src="./assets/media/app-page-1600.webp" width="1600" height="1150" alt="A manuscript open in the Inqerio editor, with in-text citations and a highlighted passage that has a comment." loading="eager">
+      </picture>
+      <figcaption>Writing in Inqerio. The study shown is a made-up example.</figcaption>
     </figure>
-  </div>
-</section>
-<section class="works" aria-label="Works with">
-  <div class="wrap works-in">
-    <p>Works with the tools you already use</p>
-    <ul><li>R</li><li>Python</li><li>Stata</li><li>SAS</li><li>SPSS</li><li>Microsoft Word</li><li>PubMed</li><li>Europe PMC</li><li>OpenAlex</li><li>Crossref</li></ul>
+    <p class="works">Works with R, Python, Stata, SAS and SPSS, with Microsoft Word, and with PubMed, Europe PMC, OpenAlex and Crossref.</p>
   </div>
 </section>
 <section class="section" aria-labelledby="f-h">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">What it does</p>
+    <div class="split-head">
       <h2 id="f-h">From the first search to the final draft</h2>
-      <p class="lead">Each stage of a study in one place, so your evidence, analysis and writing stay connected.</p>
+      <p class="lead">Each stage of a study in one place, so the evidence, the analysis and the writing stay connected to one another.</p>
     </div>
-    <div class="grid">
-      <article class="feature"><span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><h3>Write</h3><p>A manuscript editor built for research: tracked changes, comments, versions you can return to, and export to Word.</p></article><article class="feature"><span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg></span><h3>Cite</h3><p>Your references and citations in the same place as the writing, in the style your journal asks for.</p></article><article class="feature"><span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><h3>Find the evidence</h3><p>Documented, repeatable searches of PubMed, Europe PMC, OpenAlex and more; screening, extraction and the PRISMA 2020 flow diagram.</p></article><article class="feature"><span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span><h3>Analyse</h3><p>Statistics in your own R, Python, Stata, SAS or SPSS, tied to an analysis plan; thematic, framework and other qualitative approaches.</p></article><article class="feature"><span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Prepare ethics</h3><p>A consultant that reads your protocol and consent form, finds where they disagree and checks them against TCPS 2, CIOMS or your board’s checklist.</p></article><article class="feature is-ai"><span class="feature-icon"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6Z"/><path d="M19 17v4"/><path d="M17 19h4"/></svg></span><h3>AI on your terms</h3><p>Free AI that runs on your own computer. AI reads only the files you allow, and participant data is never sent without your consent.</p></article>
+    <div class="features">
+      <article class="feature"><h3>Write</h3><p>A manuscript editor built for research: tracked changes, comments, versions you can return to, and export to Word.</p></article><article class="feature"><h3>Cite</h3><p>Your references and citations in the same place as the writing, in the style your journal asks for.</p></article><article class="feature"><h3>Find the evidence</h3><p>Documented, repeatable searches of PubMed, Europe PMC, OpenAlex and more, with screening, extraction and the PRISMA 2020 flow diagram.</p></article><article class="feature"><h3>Analyse</h3><p>Statistics in your own R, Python, Stata, SAS or SPSS, tied to an analysis plan, and thematic, framework and other qualitative approaches.</p></article><article class="feature"><h3>Prepare ethics</h3><p>A consultant that reads your protocol and consent form, finds where they disagree and checks them against TCPS 2, CIOMS or your board’s checklist.</p></article><article class="feature is-ai"><h3>AI on your terms</h3><p>Free AI that runs on your own computer. It reads only the files you allow, and participant data is never sent without your consent.</p></article>
     </div>
   </div>
 </section>
 <section class="band" aria-labelledby="p-h">
   <div class="wrap band-in">
     <div>
-      <p class="eyebrow">Privacy</p>
-      <h2 id="p-h">Your research stays yours</h2>
+      <h2 id="p-h">Your research stays yours.</h2>
       <p>Projects, documents, data and notes are ordinary files in folders you choose. We never have a copy of your work.</p>
-      <p><a class="link-arrow" href="./privacy/">Read the privacy policy <svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p>
+      <p><a href="./privacy/">Read the privacy policy</a></p>
     </div>
-    <ul class="promises">
-      <li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><div><strong>Stored on your computer</strong><span>Your projects live in your own folders, covered by your usual backups.</span></div></li>
-      <li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 4.2A10 10 0 0 1 12 4c7 0 10 8 10 8a17 17 0 0 1-2.2 3.4"/><path d="M6.6 6.6A16 16 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="m2 2 20 20"/></svg><div><strong>No usage tracking</strong><span>The app sends no analytics, tracking data or advertising identifiers.</span></div></li>
-      <li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div><strong>AI only where you allow it</strong><span>Files stay hidden from AI until you allow them; participant data is never sent without consent.</span></div></li>
-    </ul>
+    <dl class="promises">
+      <div><dt>Stored on your computer</dt><dd>Your projects live in your own folders, covered by your usual backups.</dd></div>
+      <div><dt>No usage tracking</dt><dd>The app sends no analytics, tracking data or advertising identifiers.</dd></div>
+      <div><dt>AI only where you allow it</dt><dd>Files stay hidden from AI until you allow them, and participant data is never sent without consent.</dd></div>
+    </dl>
   </div>
 </section>
 <section class="section" aria-labelledby="pr-h">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Plans</p>
+    <div class="split-head">
       <h2 id="pr-h">Free to start, Pro when you need it</h2>
-      <p class="lead">Prices in Canadian dollars. Cancel any time; your work is never locked.</p>
+      <p class="lead">Prices in Canadian dollars. Cancel any time; your work is never locked. <a href="./pricing/">Compare the plans in detail.</a></p>
     </div>
     <div class="plans">
     
@@ -112,40 +106,37 @@
       </header>
       <p class="plan-price">CA$0</p>
       <p class="plan-note">No account needed.</p>
-      <ul class="ticks"><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Manuscript editor and versions</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>References and citations</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Comments, notes and activity</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Free AI on your own computer</span></li></ul>
+      <ul class="ticks"><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Manuscript editor and versions</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>References and citations</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Comments, notes and activity</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Free AI on your own computer</span></li></ul>
       <div class="plan-cta"><a class="btn btn-ghost btn-block" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a></div>
     </article>
     <article class="plan plan-main">
       <header>
-        <h3>Pro <span class="chip">Recommended</span></h3>
-        <p class="plan-lead">Everything for doing a study on your own.</p>
+        <h3>Pro</h3>
+        <p class="plan-lead">Everything for carrying out a study on your own.</p>
       </header>
-      <p class="plan-price">CA$12<small>/ month</small></p>
-      <p class="plan-note">or CA$120 a year, two months free<br>Plus sales tax where it applies.</p>
-      <ul class="ticks"><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Free</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Evidence: systematic searches to PRISMA 2020</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Analysis: statistics and qualitative</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ethics consultant</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>AI review while you write</span></li></ul>
-      <div class="plan-cta"><p class="plan-how">Subscribe in the app<br><strong>Your account → Pro</strong></p></div>
+      <p class="plan-price">CA$12 <small>a month</small></p>
+      <p class="plan-note">or CA$120 a year, two months free. Plus sales tax where it applies.</p>
+      <ul class="ticks"><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Free</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Evidence: systematic searches to PRISMA 2020</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Analysis: statistics and qualitative</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ethics consultant</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>AI review while you write</span></li></ul>
+      <div class="plan-cta"><p class="plan-how">Subscribe in the app, under <strong>Your account</strong>.</p></div>
     </article>
     <article class="plan">
       <header>
         <h3>Team</h3>
         <p class="plan-lead">Pro, plus working on projects with your colleagues.</p>
       </header>
-      <p class="plan-price">CA$18<small>/ month per person</small></p>
-      <p class="plan-note">or CA$180 a year per person<br>Plus sales tax where it applies.</p>
-      <ul class="ticks"><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Pro</span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Sharing and roles <span class="soon">Coming soon</span></span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Team chat <span class="soon">Coming soon</span></span></li><li><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Several reviewers and coders <span class="soon">Coming soon</span></span></li></ul>
-      <div class="plan-cta"><p class="plan-how">Subscribe in the app<br><strong>Your account → Team</strong></p></div>
+      <p class="plan-price">CA$18 <small>a month, per person</small></p>
+      <p class="plan-note">or CA$180 a year per person. Plus sales tax where it applies.</p>
+      <ul class="ticks"><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Pro</span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Sharing and roles <em class="soon">coming soon</em></span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Team chat <em class="soon">coming soon</em></span></li><li><svg class="tick" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Several reviewers and coders <em class="soon">coming soon</em></span></li></ul>
+      <div class="plan-cta"><p class="plan-how">Subscribe in the app, under <strong>Your account</strong>.</p></div>
     </article>
   </div>
-    <p class="more"><a class="link-arrow" href="./pricing/">Compare plans in detail <svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p>
   </div>
 </section>
 
 <section class="cta">
   <div class="wrap cta-in">
-    <div>
-      <h2>Bring your next study together.</h2>
-      <p>Free to start on Windows. Your files stay on your computer.</p>
-    </div>
+    <h2>Bring your next study together.</h2>
+    <p>Free to start on Windows, and your files stay on your computer.</p>
     <p class="actions"><a class="btn btn-light" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a><a class="btn btn-outline-light" href="./pricing/">See pricing</a></p>
   </div>
 </section>
@@ -158,7 +149,6 @@
           <img src="./assets/brand/mark-colour.png" alt="" width="19" height="35">
           <span class="wordmark">Inqerio</span>
         </a>
-        <p class="descriptor">Your intelligent research workspace</p>
         <p class="foot-tag">Where research comes together.</p>
       </div>
       <nav aria-label="Product">
@@ -181,10 +171,10 @@
     </div>
     <div class="foot-base">
       <div class="made">
-        <img src="./assets/brand/crest-black.png" alt="" width="34" height="32">
-        <p>Made by <strong>CodeSculpt</strong> in Ottawa, Ontario, Canada</p>
+        <img src="./assets/brand/crest-black.png" alt="" width="30" height="28">
+        <p>Made by <strong>CodeSculpt</strong> in Ontario, Canada</p>
       </div>
-      <p>© 2026 CodeSculpt. All rights reserved.</p>
+      <p>© 2026 CodeSculpt</p>
     </div>
   </div>
 </footer>
