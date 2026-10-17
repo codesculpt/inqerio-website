@@ -204,7 +204,7 @@ strong { font-weight: 600; color: var(--navy); }
 .band { position: relative; background: var(--navy); color: #d3e1de; padding: clamp(72px, 9vw, 112px) 0; }
 .band::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--gradient); }
 .band-in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 112px); align-items: start; }
-.band h2 { color: #fff; font-size: clamp(2.2rem, 4vw, 3.2rem); }
+.band h2 { color: #fff; }
 .band p { font-size: 1.1rem; color: #cfdeda; max-width: 44ch; }
 .band a { color: var(--sage); }
 .band a:hover { color: #fff; }
@@ -232,7 +232,7 @@ strong { font-weight: 600; color: var(--navy); }
 
 .table-wrap { margin-top: 72px; overflow-x: auto; }
 .compare { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
-.compare caption { text-align: left; font-family: var(--serif); font-size: 1.9rem; color: var(--navy); padding-bottom: 18px; }
+.compare caption { text-align: left; font-family: var(--serif); font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.012em; color: var(--navy); padding-bottom: 18px; }
 .compare th, .compare td { padding: 14px 16px; border-bottom: 1px solid var(--rule); text-align: center; }
 .compare thead th { border-bottom: 1px solid var(--navy); font-weight: 600; color: var(--navy); font-size: 0.92rem; }
 .compare thead th:not(:first-child) { width: 100px; }
@@ -256,12 +256,14 @@ strong { font-weight: 600; color: var(--navy); }
 .cta { background: var(--navy); position: relative; }
 .cta::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: var(--gradient); }
 .cta-in { padding: clamp(64px, 8vw, 96px) 0; display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'h a' 'p a'; gap: 6px 48px; align-items: center; }
-.cta h2 { grid-area: h; color: #fff; margin: 0; font-size: clamp(2rem, 3.6vw, 2.8rem); }
+.cta h2 { grid-area: h; color: #fff; margin: 0; }
 .cta p { grid-area: p; color: #b9cdc9; margin: 0; font-size: 1.05rem; }
 .cta .actions { grid-area: a; }
 
 /* Page heads and legal pages */
-.page-head { padding: clamp(56px, 7vw, 88px) 0 28px; border-bottom: 1px solid var(--navy); }
+.page-head { padding-top: clamp(56px, 7vw, 88px); }
+/* The rule under a page title stops at the content edges, like the rule under section headings. */
+.page-head .wrap { padding-bottom: 28px; border-bottom: 1px solid var(--navy); }
 .page-head h1 { margin-bottom: 14px; }
 .page-head .lead { color: var(--quiet); font-size: 1.08rem; margin: 0; }
 .legal-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
@@ -277,10 +279,9 @@ strong { font-weight: 600; color: var(--navy); }
 .note { font-size: 0.95rem; color: var(--text); background: rgba(181, 216, 208, 0.3); padding: 14px 18px; border-left: 2px solid var(--teal); }
 .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 48px; }
 .contact-grid > div { padding-top: 26px; border-top: 1px solid var(--rule); }
-.contact-grid h2 { font-size: 1.6rem; }
+.contact-grid h2 { font-size: 1.65rem; }
 .contact-grid .btn { white-space: normal; text-align: center; }
-.message { max-width: 680px; }
-.message .lead { margin-bottom: 1em; }
+.message { max-width: 68ch; }
 .message .actions { margin-top: 28px; }
 
 /* Footer */
@@ -310,7 +311,7 @@ strong { font-weight: 600; color: var(--navy); }
   .plan:first-child { border-top: 0; }
   .legal-layout { grid-template-columns: 1fr; }
   .toc { position: static; }
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; row-gap: 8px; }
   .cta-in { grid-template-columns: 1fr; grid-template-areas: 'h' 'p' 'a'; }
   .cta .actions { margin-top: 20px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
@@ -356,17 +357,17 @@ strong { font-weight: 600; color: var(--navy); }
   .plan-price { font-size: 2.7rem; }
   .table-wrap { margin-top: 56px; }
   .compare { font-size: 0.9rem; }
-  .compare caption { font-size: 1.6rem; }
   .compare th, .compare td { padding: 12px 6px; }
   .compare thead th:not(:first-child) { width: 50px; }
   .faq { margin-top: 64px; }
   .faq summary { font-size: 1.15rem; padding: 18px 0; }
   .cta-in { padding: 56px 0; }
-  .page-head { padding: 40px 0 22px; }
+  .page-head { padding-top: 40px; }
+  .page-head .wrap { padding-bottom: 22px; }
   .page-head h1 { font-size: 2.5rem; }
   .toc { display: none; }
   .summary { font-size: 1.25rem; }
-  .prose h2 { font-size: 1.45rem; }
+  .prose h2, .contact-grid h2 { font-size: 1.45rem; }
   .foot { padding: 48px 0 24px; }
   .foot-grid { gap: 28px 20px; }
   .foot-base { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 40px; }
