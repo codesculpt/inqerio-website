@@ -40,7 +40,7 @@
 }
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --navy: #142c39;
   --teal: #117f79;
   --sage: #b5d8d0;
@@ -70,27 +70,6 @@
   --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d1c24;
-    --surface: #122630;
-    --sunken: #0a171e;
-    --line: #21404d;
-    --text: #e9f1ef;
-    --muted: #a3b8bb;
-    --descriptor: var(--sage);
-    --wordmark: #ffffff;
-    --accent: #15a69e;
-    --accent-strong: #34bdb4;
-    --accent-text: #05222a;
-    --accent-soft: rgba(21, 166, 158, 0.12);
-    --sage-soft: rgba(181, 216, 208, 0.1);
-    --ai: #a38bd6;
-    --ai-soft: rgba(163, 139, 214, 0.14);
-    --band: #0a171e;
-  }
-}
-
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
@@ -110,12 +89,6 @@ h2 { font-size: clamp(1.45rem, 2.6vw, 1.9rem); font-weight: 750; margin-top: 1.6
 h3 { font-size: 1.12rem; font-weight: 700; }
 p { margin: 0 0 1em; }
 
-.on-dark { display: none; }
-@media (prefers-color-scheme: dark) {
-  .on-light { display: none; }
-  .on-dark { display: inline-block; }
-}
-
 .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; z-index: 10; }
 .skip:focus { left: 16px; }
 
@@ -127,9 +100,7 @@ p { margin: 0 0 1em; }
 .top-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand img { height: 36px; width: auto; display: block; }
-.brand .on-dark { display: none; }
-@media (prefers-color-scheme: dark) { .brand .on-light { display: none; } .brand .on-dark { display: block; } }
-/* The wordmark: Manrope ExtraBold, -2%, 26-32 px in the navigation. */
+.brand /* The wordmark: Manrope ExtraBold, -2%, 26-32 px in the navigation. */
 .wordmark { font: 800 28px/1 var(--font-display); letter-spacing: -0.02em; color: var(--wordmark); }
 .top nav { display: flex; align-items: center; gap: 4px 18px; flex-wrap: wrap; justify-content: flex-end; }
 .top nav a:not(.btn) { color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
