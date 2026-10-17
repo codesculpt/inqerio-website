@@ -4,62 +4,48 @@
  * Colours from the Inqerio brand style guide: Ink Navy #142C39, Scientific Teal #117F79, Soft Sage #B5D8D0,
  * Canvas White #F7F9F8, Slate #61727A, Insight Violet #7557B0, and the emblem gradient
  * #06384B > #006F73 > #15A69E > #91DED0.
- * Type: Newsreader for headings, Hanken Grotesk for text (both SIL Open Font License); the wordmark stays in
- * Manrope ExtraBold as the guide sets it.
+ * Type, as in the brand guide and the app: Manrope for headings and the wordmark, Inter for text (both SIL Open
+ * Font License).
  */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url('fonts/newsreader-latin-opsz-normal.woff2') format('woff2-variations');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url('fonts/newsreader-latin-ext-opsz-normal.woff2') format('woff2-variations');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url('fonts/newsreader-latin-opsz-italic.woff2') format('woff2-variations');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Hanken Grotesk';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('fonts/hanken-grotesk-latin-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Hanken Grotesk';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('fonts/hanken-grotesk-latin-ext-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Hanken Grotesk';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('fonts/hanken-grotesk-latin-wght-italic.woff2') format('woff2-variations');
-}
 @font-face {
   font-family: 'Manrope';
   font-style: normal;
   font-display: swap;
   font-weight: 200 800;
   src: url('fonts/manrope-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('fonts/manrope-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('fonts/inter-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('fonts/inter-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 :root {
@@ -83,8 +69,8 @@
   --fs-meta: 15px;
   --fs-body: 17px;
   --fs-lead: 19px;
-  --serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  --sans: 'Hanken Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --display: 'Manrope', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -104,18 +90,17 @@ a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 0
 a:hover { color: var(--teal-dark); text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 3px; }
 h1, h2, h3 {
-  font-family: var(--serif);
-  font-optical-sizing: auto;
+  font-family: var(--display);
   color: var(--navy);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.012em;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   margin: 0 0 0.45em;
   text-wrap: balance;
 }
-h1 { font-size: clamp(2.6rem, 5.2vw, 4.1rem); line-height: 1.02; letter-spacing: -0.02em; }
-h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); }
-h3 { font-size: 1.4rem; line-height: 1.2; }
+h1 { font-size: clamp(2.4rem, 4.8vw, 3.6rem); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; }
+h2 { font-size: clamp(1.75rem, 2.9vw, 2.3rem); }
+h3 { font-size: 1.25rem; line-height: 1.25; }
 p { margin: 0 0 1em; text-wrap: pretty; }
 strong { font-weight: 600; color: var(--navy); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -125,7 +110,7 @@ strong { font-weight: 600; color: var(--navy); }
 
 .lead { font-size: 1.2rem; line-height: 1.6; color: var(--text); max-width: 60ch; }
 .small { font-size: 0.9rem; color: var(--quiet); }
-.soon { font-family: var(--serif); font-style: italic; font-size: 0.98em; color: var(--violet); white-space: nowrap; }
+.soon { font-style: normal; font-weight: 500; font-size: inherit; color: var(--violet); white-space: nowrap; }
 
 /* Header ------------------------------------------------------------------------------------------------------ */
 .top { position: sticky; top: 0; z-index: 20; background: rgba(247, 249, 248, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
@@ -134,7 +119,7 @@ strong { font-weight: 600; color: var(--navy); }
 .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
 .brand img { height: 33px; width: auto; }
 /* The wordmark: Manrope ExtraBold, -2%, 26-32 px in the navigation (brand guide). */
-.wordmark { font: 800 27px/1 'Manrope', var(--sans); letter-spacing: -0.02em; color: var(--navy); }
+.wordmark { font: 800 27px/1 var(--display); letter-spacing: -0.02em; color: var(--navy); }
 .top-nav { display: flex; gap: 28px; margin-left: auto; }
 .top-nav a { color: var(--navy); text-decoration: none; font-size: 0.95rem; font-weight: 500; padding: 6px 0; border-bottom: 1px solid transparent; }
 .top-nav a:hover { border-bottom-color: var(--navy); }
@@ -149,7 +134,7 @@ strong { font-weight: 600; color: var(--navy); }
 .menu[open] summary span:nth-child(2) { opacity: 0; }
 .menu[open] summary span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 .menu-panel { position: fixed; left: 0; right: 0; top: 67px; background: var(--paper); border-bottom: 1px solid var(--rule); box-shadow: 0 24px 40px -24px rgba(20, 44, 57, 0.35); padding: 8px 20px 20px; display: grid; }
-.menu-panel a:not(.btn) { color: var(--navy); text-decoration: none; font-family: var(--serif); font-size: 1.45rem; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.menu-panel a:not(.btn) { color: var(--navy); text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 1.25rem; padding: 12px 0; border-bottom: 1px solid var(--rule); }
 .menu-panel a[aria-current='page'] { color: var(--teal); }
 .menu-panel .btn { margin-top: 18px; }
 
@@ -195,11 +180,10 @@ strong { font-weight: 600; color: var(--navy); }
 /* The screenshot fades into the page on the right and at the bottom (built into the image), so no frame. */
 .shot picture { display: block; border-radius: 8px 0 0 0; overflow: hidden; }
 .shot img { width: 100%; }
-.shot figcaption { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--quiet); }
 .works { margin: 40px 0 0; padding-top: 26px; border-top: 1px solid var(--rule); }
 .works-title { font-size: 0.95rem; color: var(--quiet); margin-bottom: 16px; }
 .works-groups { display: flex; flex-wrap: wrap; gap: 18px 40px; }
-.works-group p { font-family: var(--serif); font-style: italic; font-size: 0.98rem; color: var(--quiet); margin: 0 0 8px; }
+.works-group p { font-weight: 600; font-size: var(--fs-small); color: var(--quiet); margin: 0 0 8px; }
 .works-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .works-group li { font-size: 0.9rem; font-weight: 500; color: var(--navy); background: var(--paper); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 7px 12px; line-height: 1.2; }
 
@@ -221,7 +205,7 @@ strong { font-weight: 600; color: var(--navy); }
 .promises { margin: 6px 0 0; }
 .promises div { padding: 20px 0; border-top: 1px solid rgba(181, 216, 208, 0.25); }
 .promises div:last-child { border-bottom: 1px solid rgba(181, 216, 208, 0.25); }
-.promises dt { font-family: var(--serif); font-size: 1.35rem; color: #fff; margin-bottom: 4px; }
+.promises dt { font-family: var(--display); font-weight: 700; font-size: 1.12rem; color: #fff; margin-bottom: 4px; }
 .promises dd { margin: 0; color: #b9cdc9; font-size: 0.98rem; }
 
 /* Plans */
@@ -231,7 +215,7 @@ strong { font-weight: 600; color: var(--navy); }
 .plan-main { position: relative; background: #fbfdfc; box-shadow: inset 0 3px 0 var(--teal); }
 .plan h3 { font-size: 1.7rem; margin-bottom: 6px; }
 .plan-lead { color: var(--quiet); font-size: 0.97rem; }
-.plan-price { font-family: var(--serif); font-size: 3rem; line-height: 1; color: var(--navy); margin: 14px 0 10px; font-weight: 500; letter-spacing: -0.02em; }
+.plan-price { font-family: var(--display); font-size: 2.6rem; line-height: 1; color: var(--navy); margin: 14px 0 10px; font-weight: 800; letter-spacing: -0.02em; }
 .plan-price small { font-family: var(--sans); font-size: 0.92rem; color: var(--quiet); letter-spacing: 0; font-weight: 400; }
 .plan-note { color: var(--quiet); font-size: 0.88rem; line-height: 1.5; }
 .ticks { list-style: none; margin: 10px 0 28px; padding: 22px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 10px; align-content: start; }
@@ -242,7 +226,7 @@ strong { font-weight: 600; color: var(--navy); }
 
 .table-wrap { margin-top: 72px; overflow-x: auto; }
 .compare { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
-.compare caption { text-align: left; font-family: var(--serif); font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.012em; color: var(--navy); padding-bottom: 18px; }
+.compare caption { text-align: left; font-family: var(--display); font-size: clamp(1.75rem, 2.9vw, 2.3rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: var(--navy); padding-bottom: 18px; }
 .compare th, .compare td { padding: 14px 16px; border-bottom: 1px solid var(--rule); text-align: center; }
 .compare thead th { border-bottom: 1px solid var(--navy); font-weight: 600; color: var(--navy); font-size: 0.92rem; }
 .compare thead th:not(:first-child) { width: 100px; }
@@ -255,7 +239,7 @@ strong { font-weight: 600; color: var(--navy); }
 .faq h2 { margin-bottom: 18px; }
 .faq details { border-top: 1px solid var(--rule); }
 .faq details:last-of-type { border-bottom: 1px solid var(--rule); }
-.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 0; font-family: var(--serif); font-size: 1.3rem; color: var(--navy); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 0; font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--navy); }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after { content: '+'; font-family: var(--sans); font-weight: 300; font-size: 1.6rem; line-height: 1; color: var(--teal); flex: none; }
 .faq details[open] summary::after { content: '−'; }
@@ -285,7 +269,7 @@ strong { font-weight: 600; color: var(--navy); }
 .prose { max-width: 68ch; }
 .prose h2 { font-size: 1.65rem; margin: 1.9em 0 0.5em; }
 .prose p { line-height: 1.75; }
-.summary { font-family: var(--serif); font-size: 1.4rem; line-height: 1.45; color: var(--navy); margin-bottom: 28px; }
+.summary { font-size: 1.2rem; line-height: 1.55; color: var(--navy); margin-bottom: 28px; }
 .note { font-size: 0.95rem; color: var(--text); background: rgba(181, 216, 208, 0.3); padding: 14px 18px; border-left: 2px solid var(--teal); }
 .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 48px; }
 .contact-grid > div { padding-top: 26px; border-top: 1px solid var(--rule); }
@@ -303,7 +287,7 @@ strong { font-weight: 600; color: var(--navy); }
 .foot-grid a:not(.brand):hover { color: var(--teal); text-decoration: underline; }
 .foot-brand .brand img { height: 30px; }
 .foot-brand .wordmark { font-size: 25px; }
-.foot-tag { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--text); margin: 14px 0 0; }
+.foot-tag { color: var(--quiet); margin: 12px 0 0; }
 .foot-base { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--rule); color: var(--quiet); font-size: 0.87rem; }
 .foot-base p { margin: 0; }
 .made { display: flex; align-items: center; gap: 12px; }
