@@ -4,7 +4,7 @@
  * Colours from the Inqerio brand style guide: Ink Navy #142C39, Scientific Teal #117F79, Soft Sage #B5D8D0,
  * Canvas White #F7F9F8, Slate #61727A, Insight Violet #7557B0, and the emblem gradient
  * #06384B > #006F73 > #15A69E > #91DED0.
- * Type: Newsreader for headings, IBM Plex Sans for text (both SIL Open Font License); the wordmark stays in
+ * Type: Newsreader for headings, Hanken Grotesk for text (both SIL Open Font License); the wordmark stays in
  * Manrope ExtraBold as the guide sets it.
  */
 @font-face {
@@ -32,27 +32,27 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: 'IBM Plex Sans';
+  font-family: 'Hanken Grotesk';
   font-style: normal;
   font-display: swap;
-  font-weight: 100 700;
-  src: url('fonts/ibm-plex-sans-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  src: url('fonts/hanken-grotesk-latin-wght-normal.woff2') format('woff2-variations');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: 'IBM Plex Sans';
+  font-family: 'Hanken Grotesk';
   font-style: normal;
   font-display: swap;
-  font-weight: 100 700;
-  src: url('fonts/ibm-plex-sans-latin-ext-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  src: url('fonts/hanken-grotesk-latin-ext-wght-normal.woff2') format('woff2-variations');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
-  font-family: 'IBM Plex Sans';
+  font-family: 'Hanken Grotesk';
   font-style: italic;
   font-display: swap;
-  font-weight: 100 700;
-  src: url('fonts/ibm-plex-sans-latin-wght-italic.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  src: url('fonts/hanken-grotesk-latin-wght-italic.woff2') format('woff2-variations');
 }
 @font-face {
   font-family: 'Manrope';
@@ -78,8 +78,13 @@
   --rule-strong: #c5d2cf;
   --text: #22343d;
   --quiet: var(--slate);
+  /* One type scale for the whole site */
+  --fs-small: 14px;
+  --fs-meta: 15px;
+  --fs-body: 17px;
+  --fs-lead: 19px;
   --serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --sans: 'Hanken Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -191,7 +196,12 @@ strong { font-weight: 600; color: var(--navy); }
 .shot picture { display: block; border-radius: 8px 0 0 0; overflow: hidden; }
 .shot img { width: 100%; }
 .shot figcaption { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--quiet); }
-.works { margin: 40px 0 0; padding-top: 22px; border-top: 1px solid var(--rule); font-size: 0.95rem; color: var(--quiet); }
+.works { margin: 40px 0 0; padding-top: 26px; border-top: 1px solid var(--rule); }
+.works-title { font-size: 0.95rem; color: var(--quiet); margin-bottom: 16px; }
+.works-groups { display: flex; flex-wrap: wrap; gap: 18px 40px; }
+.works-group p { font-family: var(--serif); font-style: italic; font-size: 0.98rem; color: var(--quiet); margin: 0 0 8px; }
+.works-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.works-group li { font-size: 0.9rem; font-weight: 500; color: var(--navy); background: var(--paper); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 7px 12px; line-height: 1.2; }
 
 /* Features: an editorial grid, ruled, no boxes */
 .features { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 48px; }
@@ -299,6 +309,21 @@ strong { font-weight: 600; color: var(--navy); }
 .made { display: flex; align-items: center; gap: 12px; }
 .made img { width: 30px; }
 
+
+/* Type scale ---------------------------------------------------------------------------------------------------
+ * Every piece of text uses one of four sizes: small (notes, table heads, footer base), meta (secondary text),
+ * body and lead (introductions). Headings have their own sizes above. */
+body { font-size: var(--fs-body); }
+.lead, .hero-text .lead, .split-head .lead, .page-head .lead, .band p, .message .lead { font-size: var(--fs-lead); }
+.cta p { font-size: var(--fs-body); }
+.feature p, .faq details p, .prose p, .contact-grid p { font-size: var(--fs-body); }
+.hero-note, .plan-lead, .ticks li, .works-title, .note, .compare, .faq-more, .foot, .top-nav a, .promises dd, .toc { font-size: var(--fs-meta); }
+.small, .plan-note, .plan-how, .works-group li, .compare thead th, .foot-base, .foot-grid h2, .toc p, .btn-sm { font-size: var(--fs-small); }
+.btn { font-size: var(--fs-meta); }
+.btn-lg { font-size: var(--fs-body); }
+.contact-grid .small { font-size: var(--fs-small); }
+.prose .note, .plan-price small { font-size: var(--fs-meta); }
+
 /* Tablet ------------------------------------------------------------------------------------------------------ */
 @media (max-width: 960px) {
   .hero-in { grid-template-columns: 1fr; }
@@ -320,7 +345,8 @@ strong { font-weight: 600; color: var(--navy); }
 
 /* Phone ------------------------------------------------------------------------------------------------------- */
 @media (max-width: 720px) {
-  body { font-size: 16.5px; line-height: 1.65; }
+  :root { --fs-body: 16.5px; --fs-lead: 18px; }
+  body { line-height: 1.65; }
   .wrap { width: calc(100% - 40px); }
   .top-in { min-height: 64px; gap: 10px; }
   .top-nav { display: none; }
@@ -331,7 +357,6 @@ strong { font-weight: 600; color: var(--navy); }
   .brand img { height: 30px; }
   h1 { font-size: 2.75rem; }
   h2 { font-size: 2rem; }
-  .lead { font-size: 1.1rem; }
   .hero { padding: 36px 0 40px; }
   .hero-in { gap: 28px; }
   .hero-logo img { width: 220px; }
@@ -342,7 +367,9 @@ strong { font-weight: 600; color: var(--navy); }
   .hero-note { margin-top: 18px; }
   .shot picture { border-radius: 4px; }
   .shot figcaption { font-size: 0.95rem; }
-  .works { margin-top: 28px; padding-top: 18px; font-size: 0.92rem; }
+  .works { margin-top: 28px; padding-top: 20px; }
+  .works-groups { gap: 16px; }
+  .works-group li { padding: 6px 10px; }
   .section { padding: 64px 0; }
   .section-tight { padding-top: 28px; }
   .split-head { padding-bottom: 24px; }
@@ -356,7 +383,6 @@ strong { font-weight: 600; color: var(--navy); }
   .plan-main { order: -1; }
   .plan-price { font-size: 2.7rem; }
   .table-wrap { margin-top: 56px; }
-  .compare { font-size: 0.9rem; }
   .compare th, .compare td { padding: 12px 6px; }
   .compare thead th:not(:first-child) { width: 50px; }
   .faq { margin-top: 64px; }
