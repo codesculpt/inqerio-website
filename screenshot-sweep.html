@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- Draws the curved brand band over the app screenshot for inqerio.com. Put the screenshot (2880x1636, a made-up study only) next to this file as sweep-src.png, open it in a browser at 1440x818 and capture .box at 2x; then save as website/media/app-view-*.webp. --><html><head><style>
+html,body{margin:0;background:#f7f9f8}
+.box{position:relative;width:1440px;height:818px;overflow:hidden}
+.box img{position:absolute;inset:0;width:1440px;height:818px}
+svg{position:absolute;inset:0}
+</style></head><body><div class="box">
+<img src="sweep-src.png">
+<svg width="1440" height="818" viewBox="0 0 1440 818">
+<defs>
+<linearGradient id="g" x1="0" y1="1" x2="1" y2="0">
+<stop offset="0" stop-color="#06384b"/><stop offset="0.35" stop-color="#006f73"/><stop offset="0.7" stop-color="#15a69e"/><stop offset="1" stop-color="#91ded0"/>
+</linearGradient>
+<filter id="sh" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="-6" dy="-6" stdDeviation="10" flood-color="#142c39" flood-opacity="0.18"/></filter>
+</defs>
+<g id="layers"></g>
+</svg></div>
+<script>
+const C = (dx, dy) => `M ${-60+dx} ${600+dy} C ${110+dx} ${700+dy}, ${300+dx} ${740+dy}, ${510+dx} ${700+dy} C ${740+dx} ${655+dy}, ${905+dx} ${520+dy}, ${1000+dx} ${370+dy} C ${1075+dx} ${250+dy}, ${1098+dx} ${120+dy}, ${1094+dx} ${-60+dy} L 1500 -60 L 1500 900 L -60 900 Z`;
+const layers = [
+  [0, 0, 'url(#g)', 'filter="url(#sh)"'],
+  [16, 16, '#b5d8d0', ''],
+  [26, 26, '#ffffff', ''],
+  [30, 30, '#dceee9', ''],
+  [44, 44, '#f7f9f8', ''],
+];
+document.getElementById('layers').innerHTML = layers.map(([dx, dy, f, extra]) => `<path d="${C(dx, dy)}" fill="${f}" ${extra}/>`).join('');
+</script></body></html>
