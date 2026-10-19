@@ -86,8 +86,8 @@ body {
   text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { color: var(--teal-dark); text-decoration-thickness: 2px; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: var(--teal-dark); text-decoration: none; }
 :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 3px; }
 h1, h2, h3 {
   font-family: var(--display);
@@ -265,7 +265,7 @@ strong { font-weight: 600; color: var(--navy); }
 .toc p { font-weight: 600; color: var(--navy); margin-bottom: 10px; }
 .toc ol { margin: 0; padding: 0 0 0 1.3em; display: grid; gap: 8px; color: var(--quiet); }
 .toc a { color: var(--text); text-decoration: none; }
-.toc a:hover { color: var(--teal); text-decoration: underline; }
+.toc a:hover { color: var(--teal); }
 .prose { max-width: 68ch; }
 .prose h2 { font-size: 1.65rem; margin: 1.9em 0 0.5em; }
 .prose p { line-height: 1.75; }
@@ -284,7 +284,7 @@ strong { font-weight: 600; color: var(--navy); }
 .foot-grid h2 { font-family: var(--sans); font-size: 0.9rem; font-weight: 600; letter-spacing: 0; color: var(--navy); margin: 4px 0 14px; }
 .foot-grid nav, .foot-grid > div:not(.foot-brand) { display: flex; flex-direction: column; gap: 9px; }
 .foot-grid a:not(.brand) { color: var(--text); text-decoration: none; }
-.foot-grid a:not(.brand):hover { color: var(--teal); text-decoration: underline; }
+.foot-grid a:not(.brand):hover { color: var(--teal); }
 .foot-brand .brand img { height: 30px; }
 .foot-brand .wordmark { font-size: 25px; }
 .foot-tag { color: var(--quiet); margin: 12px 0 0; }
@@ -292,8 +292,8 @@ strong { font-weight: 600; color: var(--navy); }
 .foot-base p { margin: 0; }
 .made { display: flex; align-items: center; gap: 12px; }
 .made img { width: 30px; }
-.foot-base a.maker { color: var(--teal); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-.foot-base a.maker:hover { color: var(--teal-dark); text-decoration-thickness: 2px; }
+.foot-base a.maker { color: var(--teal); }
+.foot-base a.maker:hover { color: var(--teal-dark); }
 
 
 /* Type scale ---------------------------------------------------------------------------------------------------
