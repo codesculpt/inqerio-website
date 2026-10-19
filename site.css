@@ -292,8 +292,8 @@ strong { font-weight: 600; color: var(--navy); }
 .foot-base p { margin: 0; }
 .made { display: flex; align-items: center; gap: 12px; }
 .made img { width: 30px; }
-.foot-base a.maker { color: inherit; text-decoration: none; }
-.foot-base a.maker:hover { text-decoration: underline; }
+.foot-base a.maker { color: var(--teal); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.foot-base a.maker:hover { color: var(--teal-dark); text-decoration-thickness: 2px; }
 
 
 /* Type scale ---------------------------------------------------------------------------------------------------
