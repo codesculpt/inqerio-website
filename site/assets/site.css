@@ -294,6 +294,7 @@ strong { font-weight: 600; color: var(--navy); }
 .made img { width: 30px; }
 .foot-base a.maker { color: var(--teal); }
 .foot-base a.maker:hover { color: var(--teal-dark); }
+.foot-base a.maker strong { color: inherit; }
 
 
 /* Type scale ---------------------------------------------------------------------------------------------------
