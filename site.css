@@ -551,3 +551,7 @@ body { font-size: var(--fs-body); }
 .faq details[open] summary { color: var(--teal-dark); }
 .faq details p { margin: 0; padding: 0 22px 18px; max-width: 74ch; }
 @media (max-width: 720px) { .faq summary { padding: 13px 16px; } .faq details p { padding: 0 16px 16px; } }
+
+/* Flat cards, not floating, and room above the contact line. */
+.table-wrap, .faq-list { box-shadow: none; }
+.faq-more { margin-top: 32px; padding-bottom: 8px; font-size: 0.95rem; }
