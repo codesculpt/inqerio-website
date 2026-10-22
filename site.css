@@ -537,3 +537,17 @@ body { font-size: var(--fs-body); }
 .compare td .cross { width: 14px; height: 14px; padding: 0; background: none; color: #ccd5d8; }
 .table-wrap .compare tbody tr:hover th, .table-wrap .compare tbody tr:hover td:not(.rec) { background: #f6faf9; }
 .table-wrap .compare tbody tr:last-child td.rec { border-bottom: 1px solid color-mix(in srgb, var(--violet) 18%, #fff); }
+
+/* Questions as one rounded card, with round plus and minus marks. */
+.faq h2 { margin-bottom: 16px; }
+.faq-list { overflow: hidden; border: 1px solid var(--rule); border-radius: 18px; background: #fff; box-shadow: 0 22px 44px -26px rgba(20, 44, 57, 0.38), 0 2px 6px rgba(20, 44, 57, 0.05); }
+.faq details, .faq details:last-of-type { border: 0; border-bottom: 1px solid #edf1f0; }
+.faq details:last-of-type { border-bottom: 0; }
+.faq summary { padding: 14px 22px; font-size: 1rem; transition: background 0.15s ease; }
+.faq summary:hover { background: #f6faf9; }
+.faq summary::after { content: '+'; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: color-mix(in srgb, var(--teal) 11%, #fff); color: var(--teal); font-size: 1.15rem; font-weight: 500; line-height: 1; transition: background 0.15s ease, color 0.15s ease; }
+.faq details[open] summary::after { content: '−'; background: var(--teal); color: #fff; }
+.faq details[open] { background: #fbfdfc; box-shadow: inset 3px 0 0 var(--teal); }
+.faq details[open] summary { color: var(--teal-dark); }
+.faq details p { margin: 0; padding: 0 22px 18px; max-width: 74ch; }
+@media (max-width: 720px) { .faq summary { padding: 13px 16px; } .faq details p { padding: 0 16px 16px; } }
