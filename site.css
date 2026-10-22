@@ -463,3 +463,25 @@ body { font-size: var(--fs-body); }
   .table-wrap .compare th[scope='row'] { padding: 12px 12px; }
   .compare .feat-d { display: none; }
 }
+
+/* Compact version: one line per feature, the plans beside it. */
+.table-wrap { max-width: 980px; }
+.table-wrap .compare th[scope='row'] { padding: 11px 20px; }
+.table-wrap .compare tr.group th, .table-wrap .compare tr.group td { padding-top: 10px; padding-bottom: 10px; }
+.table-wrap .compare tr.group td { padding: 0; }
+.compare .feat { font-weight: 500; color: var(--ink, var(--navy)); }
+
+/* Smaller plan cards. */
+.plans { max-width: 1020px; margin-top: 36px; }
+.plan { padding: 24px 24px 22px; }
+.plan h3 { font-size: 1.35rem; margin-bottom: 4px; }
+.plan-lead { font-size: 0.9rem; line-height: 1.45; }
+.plan-price { font-size: 2.1rem; margin: 10px 0 6px; }
+.plan-price small { font-size: 0.85rem; }
+.plan-note { font-size: 0.82rem; line-height: 1.45; }
+.ticks { margin: 8px 0 20px; padding-top: 16px; gap: 8px; }
+.ticks li { font-size: 0.88rem; line-height: 1.45; gap: 8px; }
+.tick { margin-top: 3px; }
+.plan-how { font-size: 0.85rem; padding-top: 12px; }
+.plan-main .plan-flag { top: 24px; right: 24px; font-size: 0.62rem; padding: 2px 9px; }
+@media (max-width: 960px) { .plan { padding: 22px 20px 20px; } .plan-main .plan-flag { top: 22px; right: 20px; } }
