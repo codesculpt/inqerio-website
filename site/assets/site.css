@@ -519,3 +519,21 @@ body { font-size: var(--fs-body); }
 /* One width for the plan cards, the comparison table and the questions. */
 .plans, .table-wrap, .faq { max-width: 1020px; }
 @media (max-width: 960px) { .plans { max-width: 560px; } }
+
+/* Table polish: a light header, a raised violet Pro lane, soft marks and hairline rows. */
+.table-wrap { border: 1px solid var(--rule); border-radius: 18px; background: #fff; box-shadow: 0 22px 44px -26px rgba(20, 44, 57, 0.38), 0 2px 6px rgba(20, 44, 57, 0.05); }
+.table-wrap .compare thead th { background: #fff; color: var(--navy); border-left: 0; border-bottom: 1px solid var(--rule); padding: 16px 8px 12px; }
+.table-wrap .compare thead th:not(:first-child) { width: 136px; }
+.compare .th-name { color: var(--navy); font-size: 1.05rem; }
+.compare .th-price { color: var(--slate); font-size: 0.8rem; opacity: 1; }
+.table-wrap .compare thead th.rec { background: linear-gradient(160deg, #8468c2, #5d408f); border-bottom-color: transparent; border-radius: 14px 14px 0 0; }
+.compare thead th.rec .th-name, .compare thead th.rec .th-price { color: #fff; }
+.compare thead th.rec .th-price { opacity: 0.9; }
+.table-wrap .compare th[scope='row'], .table-wrap .compare tbody td { border-bottom: 1px solid #edf1f0; border-left: 0; }
+.compare .feat { font-weight: 500; color: var(--text); }
+.compare td.rec { background: color-mix(in srgb, var(--violet) 7%, #fff); border-left: 1px solid color-mix(in srgb, var(--violet) 18%, #fff); border-right: 1px solid color-mix(in srgb, var(--violet) 18%, #fff); }
+.compare td.yes .tick { background: color-mix(in srgb, var(--teal) 14%, #fff); color: var(--teal); }
+.compare td.yes.rec .tick { background: color-mix(in srgb, var(--violet) 18%, #fff); color: var(--violet); }
+.compare td .cross { width: 14px; height: 14px; padding: 0; background: none; color: #ccd5d8; }
+.table-wrap .compare tbody tr:hover th, .table-wrap .compare tbody tr:hover td:not(.rec) { background: #f6faf9; }
+.table-wrap .compare tbody tr:last-child td.rec { border-bottom: 1px solid color-mix(in srgb, var(--violet) 18%, #fff); }
