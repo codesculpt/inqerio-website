@@ -400,3 +400,19 @@ body { font-size: var(--fs-body); }
 
 .compare tr.group th { text-align: left; padding: 30px 0 10px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); border-bottom: 1px solid var(--navy); }
 .compare tbody tr.group:first-child th { padding-top: 14px; }
+
+.feature-tab { display: inline-block; margin-bottom: 12px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--quiet); }
+.feature-tab.is-paid { color: var(--teal); }
+
+/* The story: pain on the left, what Inqerio does about it on the right */
+.journey { border-top: 1px solid var(--navy); }
+.journey-item { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px 64px; padding: 38px 0; border-bottom: 1px solid var(--rule); align-items: start; }
+.journey-item .pain { margin: 0; font-family: var(--display); font-size: clamp(1.25rem, 2.1vw, 1.65rem); line-height: 1.25; font-weight: 600; letter-spacing: -0.015em; color: var(--quiet); }
+.journey-item .answer h3 { margin: 0 0 10px; color: var(--navy); }
+.journey-item .answer > p { margin: 0 0 16px; font-size: 1.04rem; color: var(--text); max-width: 60ch; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { padding: 4px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 500; color: var(--teal); border: 1px solid color-mix(in srgb, var(--teal) 40%, transparent); background: color-mix(in srgb, var(--teal) 7%, transparent); }
+.mission { text-align: left; }
+.mission h2 { max-width: 20ch; margin-bottom: 20px; }
+.mission p { max-width: 62ch; font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.6; }
+@media (max-width: 820px) { .journey-item { grid-template-columns: 1fr; gap: 12px; padding: 30px 0; } }
