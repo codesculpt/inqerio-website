@@ -515,3 +515,7 @@ body { font-size: var(--fs-body); }
 .faq details p { margin: -2px 0 14px; font-size: 0.95rem; line-height: 1.55; }
 .faq-more { margin-top: 16px; font-size: 0.88rem; }
 @media (max-width: 720px) { .faq { margin-top: 44px; } .faq summary { font-size: 1rem; padding: 12px 0; } }
+
+/* One width for the plan cards, the comparison table and the questions. */
+.plans, .table-wrap, .faq { max-width: 1020px; }
+@media (max-width: 960px) { .plans { max-width: 560px; } }
