@@ -489,3 +489,20 @@ body { font-size: var(--fs-body); }
 /* One continuous table, with round tick and cross marks. */
 .compare td.yes .tick { display: inline-block; box-sizing: border-box; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--teal); color: #fff; vertical-align: middle; }
 .compare td .cross { box-sizing: border-box; width: 22px; height: 22px; padding: 5px; border-radius: 50%; background: #d3dbde; color: #fff; }
+
+/* Compact table, with Pro in the brand violet so the eye goes to it first. */
+.table-wrap .compare { font-size: 0.88rem; }
+.table-wrap .compare thead th { padding: 10px 8px 12px; }
+.table-wrap .compare thead th:not(:first-child) { width: 128px; }
+.compare .th-name { font-size: 1rem; }
+.compare .th-price { margin-top: 0; font-size: 0.76rem; }
+.table-wrap .compare th[scope='row'] { padding: 6px 18px; line-height: 1.3; }
+.table-wrap .compare tbody td { padding: 5px 8px; }
+.compare td.yes .tick { width: 18px; height: 18px; padding: 3px; }
+.compare td .cross { width: 18px; height: 18px; padding: 4px; }
+.table-wrap .compare thead th.rec { background: var(--violet); color: #fff; box-shadow: none; border-left-color: var(--violet); }
+.compare thead th .rec-flag { display: inline-block; margin-bottom: 3px; padding: 1px 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.22); color: #fff; font-size: 0.58rem; }
+.compare td.rec { background: color-mix(in srgb, var(--violet) 9%, #fff); border-left-color: color-mix(in srgb, var(--violet) 30%, #fff); border-right: 1px solid color-mix(in srgb, var(--violet) 30%, #fff); }
+.compare td.yes.rec .tick { background: var(--violet); }
+.plan-main { box-shadow: inset 0 3px 0 var(--violet); }
+.plan-flag { background: var(--violet); }
