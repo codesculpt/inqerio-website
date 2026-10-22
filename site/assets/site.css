@@ -397,3 +397,6 @@ body { font-size: var(--fs-body); }
   .proof li:nth-child(3) { padding-left: 0; border-left: 0; }
   .proof li:nth-child(n + 3) { border-top: 1px solid var(--rule); }
 }
+
+.compare tr.group th { text-align: left; padding: 30px 0 10px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); border-bottom: 1px solid var(--navy); }
+.compare tbody tr.group:first-child th { padding-top: 14px; }
