@@ -431,3 +431,35 @@ body { font-size: var(--fs-body); }
 }
 .plan-main .plan-flag { position: absolute; top: 34px; right: 32px; margin: 0; }
 @media (max-width: 960px) { .plan-main .plan-flag { top: 28px; right: 22px; } }
+
+/* Comparison table: a framed grid with one lane per plan, the plan and its price in the header, and Pro lifted as the recommended choice. */
+.compare-title { margin-top: 72px; font-size: clamp(1.75rem, 2.9vw, 2.3rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--navy); }
+.table-wrap { margin-top: 24px; border: 1px solid var(--rule-strong); border-radius: 14px; background: #fff; box-shadow: 0 10px 30px -18px rgba(14, 40, 48, 0.35); }
+.table-wrap .compare { border-collapse: separate; border-spacing: 0; font-size: 0.95rem; }
+.table-wrap .compare th, .table-wrap .compare td { border-bottom: 1px solid var(--rule); }
+.table-wrap .compare thead th { padding: 18px 12px; border-bottom: 0; background: linear-gradient(90deg, var(--teal-dark), var(--teal)); color: #fff; vertical-align: bottom; }
+.table-wrap .compare thead th:not(:first-child) { width: 150px; border-left: 1px solid rgba(255, 255, 255, 0.22); }
+.compare .th-name { display: block; font-family: var(--display); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; }
+.compare .th-price { display: block; margin-top: 2px; font-size: 0.82rem; font-weight: 500; opacity: 0.92; }
+.compare .th-price small { font-size: inherit; }
+.table-wrap .compare thead th.rec { background: #fff; color: var(--teal-dark); box-shadow: inset 0 3px 0 var(--teal); }
+.compare thead th .rec-flag { margin-bottom: 4px; color: var(--teal); opacity: 1; }
+.table-wrap .compare th[scope='row'] { padding: 14px 20px; font-weight: 400; }
+.compare .feat { display: block; font-weight: 600; color: var(--navy); }
+.compare .feat-d { display: block; margin-top: 2px; font-size: 0.85rem; line-height: 1.45; color: var(--quiet); }
+.table-wrap .compare tbody td { border-left: 1px solid var(--rule); }
+.compare .cross { display: inline-block; vertical-align: middle; color: #b8c4c8; }
+.compare .no { color: #b8c4c8; }
+.table-wrap .compare tr.group th, .table-wrap .compare tr.group td { padding: 12px 20px; background: #eef3f2; border-bottom: 1px solid var(--rule-strong); color: var(--teal-dark); }
+.table-wrap .compare tr.group td { padding: 0; border-left: 1px solid var(--rule); }
+.table-wrap .compare tr.group td.rec { background: color-mix(in srgb, var(--teal) 12%, #eef3f2); }
+.table-wrap .compare tbody tr:last-child th, .table-wrap .compare tbody tr:last-child td { border-bottom: 0; }
+@media (max-width: 720px) {
+  .compare-title { margin-top: 56px; }
+  .table-wrap .compare thead th:not(:first-child) { width: 64px; }
+  .table-wrap .compare thead th { padding: 14px 4px; }
+  .compare .th-name { font-size: 0.95rem; }
+  .compare .th-price { display: none; }
+  .table-wrap .compare th[scope='row'] { padding: 12px 12px; }
+  .compare .feat-d { display: none; }
+}
