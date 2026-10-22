@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inqerio walkthrough</title>
+<meta name="robots" content="noindex">
+<script>if (/[?&]embed\b/.test(location.search)) document.documentElement.classList.add("embed");</script>
+</head>
+<body>
+<style>
+@font-face { font-family: "Manrope"; font-style: normal; font-display: swap; font-weight: 200 800; src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2-variations"); }
+@font-face { font-family: "Inter"; font-style: normal; font-display: swap; font-weight: 100 900; src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2-variations"); }
+.embed body { padding: 12px; }
+.embed header.top { display: none; }
+.embed .wrap { gap: 12px; }
+/* Layout concept: a 16:9 film stage in the middle, chapters and the spoken script beside it, controls under the stage.
+   The film is a single dark world in the app's own teal, so the page commits to one look on purpose. */
+:root {
+  color-scheme: dark;
+  --bg: #081216;
+  --panel: #0e1d23;
+  --raised: #13292f;
+  --line: #1e3a43;
+  --text: #e7f2f3;
+  --muted: #8ca8ae;
+  --accent: #1fb3a5;
+  --accent-ink: #04201d;
+  --accent-soft: rgba(31, 179, 165, 0.16);
+  --warn: #e3a93a;
+  --bad: #e8766b;
+  --ok: #43bd8f;
+  --display: "Manrope", system-ui, sans-serif;
+  --body: "Inter", system-ui, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 var(--body); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 16px; }
+header.top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+header.top h1 { margin: 0; font: 800 22px var(--display); letter-spacing: -0.01em; }
+header.top p { margin: 0; color: var(--muted); }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+@media (max-width: 980px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- stage ---------- */
+.stagebox { display: grid; gap: 10px; min-width: 0; }
+.stage { position: relative; container-type: inline-size; aspect-ratio: 16 / 9; width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: #0a161b; user-select: none; }
+.stage > .screen, .stage > .cursor { font-size: 1.4cqw; }
+.screen { position: absolute; inset: 0; }
+.seeking * { transition: none !important; }
+.cap { position: absolute; left: 50%; bottom: 3.2%; transform: translateX(-50%); max-width: 78%; padding: .55em 1.1em; border-radius: .6em; background: rgba(4, 12, 15, 0.86); border: 1px solid var(--line); font-size: max(12px, 1.6cqw); line-height: 1.4; text-align: center; z-index: 30; transition: opacity .3s; }
+.cap:empty, .nocap .cap { opacity: 0; }
+.badge { position: absolute; top: 1.1%; right: 1.6%; z-index: 30; padding: .25em .8em; border-radius: 99em; background: rgba(4, 12, 15, 0.82); border: 1px solid var(--line); font: 600 max(10px, 1.1cqw) var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.cursor { position: absolute; z-index: 40; width: 1.6em; height: 1.6em; margin: -.2em 0 0 -.1em; pointer-events: none; transition: left .9s cubic-bezier(.5, 0, .2, 1), top .9s cubic-bezier(.5, 0, .2, 1); filter: drop-shadow(0 .2em .3em rgba(0,0,0,.5)); }
+.cursor svg { width: 100%; height: 100%; }
+.cursor.click::after { content: ""; position: absolute; left: -.3em; top: -.3em; width: 1.2em; height: 1.2em; border-radius: 50%; border: .15em solid var(--accent); animation: pulse .5s ease-out; }
+@keyframes pulse { from { transform: scale(.3); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+.bigplay { position: absolute; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(4, 12, 15, 0.32); border: 0; width: 100%; }
+.bigplay span { display: grid; place-items: center; width: 5.2em; height: 5.2em; border-radius: 50%; background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 .6em var(--accent-soft); }
+.bigplay svg { width: 2em; height: 2em; margin-left: .2em; }
+.bigplay[hidden] { display: none; }
+
+/* ---------- controls ---------- */
+.controls { display: grid; gap: 8px; }
+.scrub { position: relative; height: 22px; }
+.scrub input { position: absolute; inset: 0; width: 100%; margin: 0; background: none; -webkit-appearance: none; appearance: none; z-index: 2; }
+.scrub input::-webkit-slider-runnable-track { height: 6px; border-radius: 4px; background: var(--line); }
+.scrub input::-moz-range-track { height: 6px; border-radius: 4px; background: var(--line); }
+.scrub input::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -4px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.scrub input::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.ticks { position: absolute; left: 0; right: 0; top: 8px; height: 6px; pointer-events: none; z-index: 1; }
+.ticks i { position: absolute; top: -2px; width: 2px; height: 10px; background: var(--bg); }
+.btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.btn:hover { border-color: var(--accent); }
+.btn:focus-visible, .chap:focus-visible, .bigplay:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.btn svg { width: 14px; height: 14px; fill: currentColor; }
+.time { font-variant-numeric: tabular-nums; color: var(--muted); margin-left: auto; }
+select.btn { padding-right: 6px; }
+
+/* ---------- side ---------- */
+.side { display: grid; gap: 12px; min-width: 0; }
+.chapters { display: grid; gap: 2px; padding: 6px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); max-height: 430px; overflow-y: auto; }
+.chap { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: baseline; text-align: left; padding: 7px 10px; border: 0; border-radius: 8px; background: none; }
+.chap:hover { background: var(--raised); }
+.chap.on { background: var(--accent-soft); }
+.chap b { font: 600 13px var(--body); }
+.chap small { color: var(--muted); font-variant-numeric: tabular-nums; }
+.script { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.script h2 { margin: 0 0 6px; font: 700 13px var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.script p { margin: 0; color: var(--text); line-height: 1.6; }
+.note { color: var(--muted); font-size: 12.5px; margin: 0; }
+
+/* ---------- film vocabulary (the mock app) ---------- */
+.screen [data-at] { opacity: 0; transform: translateY(.7em); transition: opacity .5s, transform .5s; }
+.screen [data-at].on { opacity: 1; transform: none; }
+.screen [data-win] { opacity: 0; transition: opacity .45s; pointer-events: none; }
+.screen [data-win].on { opacity: 1; }
+.screen .abs, .screen .pane { position: absolute; inset: 0; }
+.mono { font-family: var(--mono); }
+.faint { color: var(--muted); }
+.app { position: absolute; inset: 0; display: grid; grid-template-columns: 11em minmax(0, 1fr); grid-template-rows: 2.6em minmax(0, 1fr); background: #0a161b; }
+.titlebar { grid-column: 1 / -1; display: flex; align-items: center; gap: .7em; padding: 0 1em; background: #071013; border-bottom: 1px solid var(--line); font-size: .9em; color: var(--muted); }
+.titlebar .dots { display: flex; gap: .35em; } .titlebar .dots i { width: .7em; height: .7em; border-radius: 50%; background: #1e3a43; }
+.rail { padding: .8em .6em; border-right: 1px solid var(--line); background: #0b181d; display: grid; align-content: start; gap: .15em; }
+.rail .brand { font: 800 1.25em var(--display); padding: 0 .5em .7em; letter-spacing: -.01em; }
+.rail .t { display: flex; align-items: center; gap: .6em; padding: .5em .6em; border-radius: .5em; color: var(--muted); font-size: .95em; transition: background .4s, color .4s; }
+.rail .t::before { content: ""; width: .85em; height: .85em; border-radius: .25em; border: .15em solid currentColor; opacity: .7; }
+.rail .t.is-on { background: var(--accent-soft); color: var(--text); }
+.rail .t.is-on::before { background: var(--accent); border-color: var(--accent); opacity: 1; }
+.main { position: relative; padding: 1.1em 1.4em; min-width: 0; overflow: hidden; }
+h3.h { margin: 0 0 .15em; font: 700 1.5em var(--display); letter-spacing: -.01em; }
+p.sub { margin: 0 0 .9em; color: var(--muted); font-size: .95em; }
+.card { border: 1px solid var(--line); border-radius: .7em; background: var(--panel); padding: .8em 1em; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: .8em; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; }
+.btnm { display: inline-flex; align-items: center; gap: .4em; padding: .45em .9em; border-radius: .5em; border: 1px solid var(--line); background: var(--raised); font-size: .95em; font-weight: 500; transition: background .3s, border-color .3s; }
+.btnm.pri { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.btnm.off { opacity: .4; }
+.btnm.is-on, .opt.is-on { background: var(--accent-soft); border-color: var(--accent); }
+.opt { display: inline-flex; padding: .35em .8em; border-radius: .45em; border: 1px solid var(--line); background: var(--raised); font-size: .9em; transition: all .3s; }
+.opt.bad.is-on { background: rgba(232,118,107,.9); color: #2a0e0b; border-color: transparent; font-weight: 600; }
+.opt.good.is-on { background: var(--ok); color: #05261b; border-color: transparent; font-weight: 600; }
+.opt.lock { opacity: .4; }
+.chip { display: inline-flex; align-items: center; gap: .35em; padding: .15em .7em; border-radius: 99em; background: var(--raised); border: 1px solid var(--line); font-size: .85em; color: var(--muted); }
+.chip.ai { color: var(--warn); border-color: rgba(227,169,58,.4); background: rgba(227,169,58,.1); }
+.chip.ok { color: var(--ok); border-color: rgba(67,189,143,.4); background: rgba(67,189,143,.1); }
+.field { display: block; padding: .5em .8em; border: 1px solid var(--line); border-radius: .5em; background: #08131733; background-color: #07121599; min-height: 2.3em; }
+.lbl { font-size: .8em; color: var(--muted); margin-bottom: .25em; display: block; }
+.list { display: grid; gap: .35em; }
+.li { display: grid; grid-template-columns: auto 1fr auto; gap: .7em; align-items: center; padding: .5em .8em; border: 1px solid var(--line); border-radius: .55em; background: var(--panel); transition: border-color .3s, background .3s; }
+.li.is-on { border-color: var(--accent); background: var(--accent-soft); }
+.dot { width: .7em; height: .7em; border-radius: 50%; background: var(--line); transition: background .3s; } .dot.is-on { background: var(--ok); }
+.steps { display: flex; gap: .3em; margin-bottom: .9em; flex-wrap: nowrap; }
+.step { flex: 1; padding: .45em .6em; border-radius: .5em; border: 1px solid var(--line); font-size: .82em; color: var(--muted); display: flex; align-items: center; gap: .4em; transition: all .4s; white-space: nowrap; }
+.step::before { content: ""; width: .8em; height: .8em; border-radius: 50%; border: .15em solid var(--line); }
+.step.cur.done { background: none; border-color: var(--line); color: var(--muted); }
+.step.done::before { background: var(--accent); border-color: var(--accent); } .step.cur { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+.bar { height: .45em; border-radius: 9em; background: var(--line); overflow: hidden; } .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 1.6s ease; } .bar.on i { width: var(--w, 100%); }
+.code { padding: .8em 1em; border-radius: .6em; background: #06101399; background-color: #060f12; border: 1px solid var(--line); font: .88em/1.55 var(--mono); white-space: pre; overflow: hidden; color: #cfe7e6; }
+.code .c { color: #6f9aa0; } .code .k { color: #7fd1c8; } .code .s { color: #e3c07a; }
+.modal { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(3,9,11,.6); }
+.dialog { width: 54%; padding: 1.2em 1.4em; border-radius: .9em; background: #0f2128; border: 1px solid var(--line); box-shadow: 0 1.5em 3em rgba(0,0,0,.5); }
+.dialog h4 { margin: 0 0 .2em; font: 700 1.25em var(--display); }
+.tbl { width: 100%; border-collapse: collapse; font-size: .92em; } .tbl th { text-align: left; color: var(--muted); font-weight: 500; padding: .35em .6em; border-bottom: 1px solid var(--line); } .tbl td { padding: .4em .6em; border-bottom: 1px solid var(--line); }
+.hl { background: rgba(31,179,165,.28); border-radius: .2em; padding: 0 .15em; box-shadow: inset 0 -.12em 0 var(--accent); }
+.hl2 { background: rgba(227,169,58,.25); border-radius: .2em; padding: 0 .15em; box-shadow: inset 0 -.12em 0 var(--warn); }
+.hero { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; gap: .6em; background: radial-gradient(60% 70% at 50% 40%, #11333a 0%, #0a161b 70%); }
+.hero h2 { margin: 0; font: 800 5.2em/1 var(--display); letter-spacing: -.03em; }
+.hero p { margin: 0; color: var(--muted); font-size: 1.5em; }
+.mark { width: 3.4em; height: 3.4em; }
+.split { display: grid; grid-template-columns: 15em 1fr; height: 100%; }
+.ins { padding: 1.6em 1.2em; border-right: 1px solid var(--line); background: #0a161b; display: grid; align-content: start; gap: .8em; }
+.ins .s { display: flex; gap: .7em; align-items: center; color: var(--muted); transition: color .4s; } .ins .s b { display: grid; place-items: center; width: 1.7em; height: 1.7em; border-radius: 50%; border: 1px solid var(--line); font-size: .9em; transition: all .4s; } .ins .s.is-on { color: var(--text); } .ins .s.is-on b { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.stagearea { position: relative; }
+.tag { position: absolute; z-index: 3; padding: .2em .7em; border-radius: .4em; background: var(--accent); color: var(--accent-ink); font-size: .8em; font-weight: 700; }
+.mini { font-size: .85em; }
+svg.chart text { fill: var(--muted); font: 11px var(--body); }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Inqerio Walkthrough</h1>
+    <p>From installing the beta to the whole research workflow, in about ten minutes.</p>
+  </header>
+  <div class="layout">
+    <div class="stagebox">
+      <div class="stage" id="stage">
+        <div class="screen" id="screen"></div>
+        <div class="badge" id="badge"></div>
+        <div class="cursor" id="cursor" hidden><svg viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.6L9.3 19z" fill="#fff" stroke="#04201d" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
+        <div class="cap" id="cap"></div>
+        <button class="bigplay" id="bigplay" aria-label="Play the walkthrough"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span></button>
+      </div>
+      <div class="controls">
+        <div class="scrub"><div class="ticks" id="ticks"></div><input id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Position in the film"></div>
+        <div class="btns">
+          <button class="btn" id="prev" aria-label="Previous chapter"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+          <button class="btn primary" id="play"><svg viewBox="0 0 24 24" id="playicon"><path d="M6 4l14 8-14 8z"/></svg><span id="playlbl">Play</span></button>
+          <button class="btn" id="next" aria-label="Next chapter"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button>
+          <select class="btn" id="speed" aria-label="Speed"><option value="1">1x</option><option value="1.25">1.25x</option><option value="1.5">1.5x</option><option value="0.75">0.75x</option></select>
+          <button class="btn" id="cc" aria-pressed="true">Captions</button>
+          <button class="btn" id="voice" aria-pressed="false">Read aloud</button>
+          <button class="btn" id="full">Full screen</button>
+          <span class="time" id="time">0:00 / 0:00</span>
+        </div>
+      </div>
+      <p class="note">The screens are drawn to show how each step works and use made-up sample data. Your own project will look a little different. Read aloud uses your browser's voice and needs a click to start.</p>
+    </div>
+    <aside class="side">
+      <nav class="chapters" id="chapters" aria-label="Chapters"></nav>
+      <section class="script"><h2 id="stitle">Script</h2><p id="stext"></p></section>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  /* ============ tiny builders ============ */
+  var MARK = '<svg class="mark" viewBox="0 0 48 48"><circle cx="22" cy="22" r="14" fill="none" stroke="#1fb3a5" stroke-width="5"/><path d="M31 31l11 11" stroke="#1fb3a5" stroke-width="5" stroke-linecap="round"/></svg>';
+  var TABS = ["Editor", "References", "Evidence", "Analysis", "Qualitative", "Ethics"];
+  function rail(active, extra) {
+    return '<div class="rail"><div class="brand">Inqerio</div>' + TABS.map(function (t) {
+      var on = t === active ? " is-on" : "";
+      return '<div class="t' + on + '" data-tab="' + t + '"' + ((extra && extra[t]) ? ' data-cls="' + extra[t] + '"' : '') + '>' + t + '</div>';
+    }).join("") + '</div>';
+  }
+  function app(active, main, extra) {
+    return '<div class="app"><div class="titlebar"><span class="dots"><i></i><i></i><i></i></span><span>Inqerio · Sample project</span></div>' + rail(active, extra) + '<div class="main">' + main + '</div></div>';
+  }
+  function steps(names, curWins) {
+    return '<div class="steps">' + names.map(function (n, i) {
+      return '<div class="step" data-cls="' + curWins[i] + '">' + n + '</div>';
+    }).join("") + '</div>';
+  }
+
+  /* ============ the scenes ============ */
+  /* Times are fractions (0 to 1) of the scene. data-at shows an element, data-win="a:b" shows it between a and b,
+     data-cls="f:class" adds a class from f on, data-type="f" types data-text from f. cur is the cursor path. */
+  var S = [];
+
+  S.push({
+    id: "intro", title: "Welcome", badge: "Welcome",
+    script: "Inqerio is a desktop workspace where you write, review the evidence, analyse your data and work with your team, all in one project. This walkthrough takes you from installing the beta to using each part of the app. Follow along, or jump to any chapter you need.",
+    cap: [[0, "Where research comes together."], [0.45, "From install to every feature, in one project"]],
+    html: function () {
+      return '<div class="hero"><div data-at="0">' + MARK + '</div><h2 data-at="0">Inqerio</h2><p data-at="0">Where research comes together.</p>' +
+        '<div style="display:flex;gap:.5em;flex-wrap:wrap;justify-content:center;margin-top:1.2em">' + TABS.map(function (t, i) { return '<span class="chip" data-at="' + (0.3 + i * 0.07).toFixed(2) + '">' + t + '</span>'; }).join("") + '</div></div>';
+    }, cur: []
+  });
+
+  S.push({
+    id: "install", title: "Install and first launch", badge: "Install",
+    script: "Open the download link from your invitation. Your browser saves a file called Inqerio Setup. Open it and follow the installer. It installs for your own user account, and you can choose the folder. If Windows shows a notice because the beta is new, choose More info and then Run anyway. When it finishes, Inqerio opens with a short welcome. Read and accept the privacy notice and terms. Next you can set up the free AI that runs on your own computer, or skip it and do it later. Then sign in with the email address your invitation was sent to, and choose how updates are handled.",
+    cap: [[0, "1  Download the installer from your invitation"], [0.25, "2  Run it and choose where to install"], [0.45, "3  Accept the privacy notice and terms"], [0.62, "4  Set up the free AI on your computer, or skip for now"], [0.8, "5  Sign in with your invited email"]],
+    html: function () {
+      return '<div class="split"><div class="ins">' +
+        ['Download', 'Install', 'Privacy and terms', 'Free AI', 'Sign in'].map(function (n, i) {
+          var st = [0, 0.25, 0.45, 0.62, 0.8][i];
+          return '<div class="s" data-cls="' + st + ':is-on"><b>' + (i + 1) + '</b>' + n + '</div>';
+        }).join("") + '</div><div class="stagearea">' +
+        '<div class="pane" data-win="0:0.25" style="padding:1.6em"><div class="card" style="max-width:34em"><span class="lbl">Browser downloads</span>' +
+        '<div class="li"><span class="dot is-on"></span><span><b>Inqerio-Setup-1.0.0-beta.15.exe</b><br><span class="faint mini">Download complete</span></span><span id="dlopen" class="btnm pri">Open file</span></div>' +
+        '<div class="bar" style="margin-top:.8em" data-at="0.04"><i style="--w:100%"></i></div></div>' +
+        '<div class="card" style="max-width:34em;margin-top:1em" data-at="0.14"><b>Windows protected your PC</b><p class="faint mini" style="margin:.3em 0 .7em">This can appear for a new app. Choose More info, then Run anyway.</p><span class="btnm" id="runany">More info</span></div></div>' +
+        '<div class="pane" data-win="0.25:0.45" style="display:grid;place-items:center"><div class="dialog" style="width:66%"><h4>Install Inqerio</h4><span class="lbl" style="margin-top:.6em">Install folder</span><div class="field mono mini">C:\\Users\\you\\AppData\\Local\\Programs\\Inqerio</div><div class="bar" style="margin-top:1em" data-at="0.3"><i data-cls="0.3:full" style="width:0"></i></div><div style="margin-top:.9em;text-align:right"><span class="btnm pri" id="inst">Install</span></div></div></div>' +
+        '<div class="pane" data-win="0.45:0.62" style="display:grid;place-items:center"><div class="dialog" style="width:66%"><h4>Welcome to Inqerio</h4><p class="faint mini" style="margin:0 0 .8em">Please read the privacy notice and terms.</p><div class="list"><div class="li" style="grid-template-columns:1fr auto"><span>Privacy notice</span><span class="chip">Read</span></div><div class="li" style="grid-template-columns:1fr auto"><span>Terms of use</span><span class="chip">Read</span></div></div><div style="margin-top:.8em;display:flex;align-items:center;gap:.5em"><span class="opt" id="agree" data-cls="0.52:is-on">I agree</span><span style="margin-left:auto" class="btnm pri">Continue</span></div></div></div>' +
+        '<div class="pane" data-win="0.62:0.8" style="display:grid;place-items:center"><div class="dialog" style="width:68%"><h4>Free AI on this computer</h4><p class="faint mini" style="margin:0 0 .9em">Runs on your own machine. You choose what it can see.</p><div class="list"><div class="li"><span class="dot is-on"></span><span>Install the local AI runtime</span><span class="chip ok" data-at="0.68">Ready</span></div><div class="li"><span class="dot" data-cls="0.74:is-on"></span><span>Download a small starter model</span><span class="bar" style="width:6em"><i data-cls="0.66:full" style="width:0"></i></span></div></div><div style="margin-top:.9em;display:flex;gap:.5em;justify-content:flex-end"><span class="btnm" id="skipai">Skip for now</span><span class="btnm pri" id="setai">Set up</span></div></div></div>' +
+        '<div class="pane" data-win="0.8:1.01" style="display:grid;place-items:center"><div class="dialog" style="width:66%"><h4>An Inqerio account</h4><p class="faint mini" style="margin:0 0 .8em">Use the email address your beta invitation was sent to.</p><span class="lbl">Email</span><div class="field"><span data-type="0.84" data-text="you@example.com"></span></div><div style="margin-top:.9em;text-align:right"><span class="btnm pri" id="signin" data-at="0.92">Send sign-in link</span></div></div></div>' +
+        '</div></div>';
+    }, cur: [[0.05, "#dlopen"], [0.16, "#runany"], [0.3, "#inst"], [0.5, "#agree"], [0.66, "#setai"], [0.86, ".field"], [0.93, "#signin"]]
+  });
+
+  S.push({
+    id: "tour", title: "Your workspace", badge: "Workspace",
+    script: "Everything lives in a project folder on your computer. The tabs down the left are the parts of your workflow. Editor is for writing. References holds your citations. Evidence runs searches and systematic reviews. Analysis is for statistics. Qualitative handles interviews and coding. Ethics checks your protocol and consent form. My notes, comments, versions and team chat sit along the top, and the free plan includes the Editor, References and local AI.",
+    cap: [[0, "One project, one place"], [0.25, "Each tab is a part of the workflow"], [0.8, "Notes, comments, versions and chat sit along the top"]],
+    html: function () {
+      var d = ["Write", "Cite", "Review the evidence", "Analyse", "Code interviews", "Check ethics"];
+      var main = '<div style="display:flex;gap:1.4em;border-bottom:1px solid var(--line);padding-bottom:.5em;margin:-0.2em 0 1em;color:var(--muted);font-size:.95em" data-at="0.78"><span>My notes</span><span>Comments</span><span>Versions</span><span>Activity</span><span>Team chat</span></div>' +
+        '<h3 class="h">Sample project</h3><p class="sub">Folder on your computer · Last saved a moment ago</p><div class="grid3">' +
+        TABS.map(function (t, i) { return '<div class="card" data-at="' + (0.12 + i * 0.1).toFixed(2) + '"><b>' + t + '</b><div class="faint mini">' + d[i] + '</div></div>'; }).join("") + '</div>';
+      var ex = {}; TABS.forEach(function (t, i) { var a = 0.2 + i * 0.1; ex[t] = a.toFixed(2) + ":is-on " + (a + 0.1).toFixed(2) + ":off"; });
+      return app("", main, ex);
+    }, cur: []
+  });
+
+  S.push({
+    id: "editor", title: "Write in the Editor", badge: "Editor",
+    script: "The Editor feels like a word processor. Type your manuscript with headings, tables and figures. Turn on track changes to suggest edits, and add comments for your co-authors. The version history lets you restore any earlier draft. Choose US, UK or Canadian spelling, and the offline dictionary checks as you type.",
+    cap: [[0, "Write with headings, tables and figures"], [0.38, "Track changes and comments for co-authors"], [0.7, "Restore any earlier version"]],
+    html: function () {
+      var main = '<div style="display:grid;grid-template-columns:1fr 14em;gap:1.2em;height:100%"><div class="card" style="padding:1.2em 1.6em"><h3 class="h">Methods</h3><p style="line-height:1.7;margin:.4em 0">We recruited adults from three community clinics. Participants completed a sleep questionnaire at baseline and again after twelve weeks<span class="hl2" data-cls="0.4:hl2x" style="text-decoration:line-through;text-decoration-color:var(--bad)" data-at="0.38"> of follow up</span><span data-at="0.44" style="color:var(--ok);text-decoration:underline"> of exercise</span>.</p>' +
+        '<p style="line-height:1.7;margin:.4em 0" data-at="0.15">Mean weekly activity was <span class="hl" data-at="0.2">212 minutes</span> (SD 64). Differences were tested with a linear model.</p>' +
+        '<table class="tbl" data-at="0.28" style="margin-top:.8em"><tr><th>Group</th><th>n</th><th>Mean score</th></tr><tr><td>Active</td><td>84</td><td>7.1</td></tr><tr><td>Usual care</td><td>81</td><td>6.2</td></tr></table></div>' +
+        '<div style="display:grid;gap:.7em;align-content:start"><div class="card" data-at="0.5"><span class="lbl">Comment · Dr Mensah</span>Please state how the twelve weeks were counted.<div style="margin-top:.5em"><span class="btnm" id="reply">Reply</span></div></div><div class="card" data-at="0.7"><span class="lbl">Versions</span><div class="list"><div class="li"><span class="dot is-on"></span><span class="mini">Draft 4 · today</span><span></span></div><div class="li" id="v2"><span class="dot"></span><span class="mini">Draft 3 · Tuesday</span><span class="btnm" style="font-size:.8em">Restore</span></div></div></div></div></div>';
+      return app("Editor", main);
+    }, cur: [[0.4, ".hl2"], [0.55, "#reply"], [0.78, "#v2"]]
+  });
+
+  S.push({
+    id: "refs", title: "Cite and manage references", badge: "References",
+    script: "Add references by searching, by importing a file, or by pasting a DOI. They sit next to your text, so you cite as you write. Switch from APA to Vancouver, Nature or The Lancet, and every citation and your reference list update at once. Open a PDF inside the app, highlight a passage and attach a comment to it.",
+    cap: [[0, "Add references by search, file or DOI"], [0.4, "Change style and everything updates"], [0.72, "Read and highlight PDFs in the app"]],
+    html: function () {
+      var main = '<h3 class="h">References</h3><p class="sub">24 references · Style <b id="style" style="color:var(--text)">APA 7</b></p><div class="grid2"><div class="list">' +
+        ['Reyes M, Chen L. Exercise and sleep quality in adults. 2021', 'Okafor T. Activity programmes in primary care. 2019', 'Lindqvist A, Singh R. Sleep questionnaires compared. 2022'].map(function (r, i) { return '<div class="li" data-at="' + (0.08 + i * 0.08).toFixed(2) + '"><span class="dot is-on"></span><span class="mini">' + r + '</span><span></span></div>'; }).join("") +
+        '<div class="card" data-at="0.3"><span class="lbl">In your text</span><div style="display:grid"><span style="grid-area:1/1" data-win="0:0.45">…improved sleep (Reyes &amp; Chen, 2021).</span><span style="grid-area:1/1" data-win="0.45:1.01">…improved sleep [1].</span></div></div><div style="display:flex;gap:.5em" data-at="0.38"><span class="btnm" id="stylebtn">Style APA 7 ▾</span><span class="chip" data-at="0.5">Vancouver</span></div></div>' +
+        '<div class="card" data-at="0.66" style="min-height:14em"><span class="lbl">Reyes &amp; Chen 2021 · PDF</span><p style="line-height:1.7;margin:.3em 0">Participants in the active group reported <span class="hl" data-at="0.78">better sleep after twelve weeks</span> than those in usual care.</p><div class="card" data-at="0.86" style="margin-top:.6em"><span class="lbl">Comment</span>Matches our primary outcome.</div></div></div>';
+      return app("References", main);
+    }, cur: [[0.4, "#stylebtn"], [0.78, ".hl"]]
+  });
+
+  S.push({
+    id: "search", title: "Search the literature", badge: "Evidence · Search",
+    script: "In Evidence, start with a search. One query reaches PubMed, Scopus, Web of Science, OpenAlex, ClinicalTrials.gov and more, twelve databases in all. Results are merged and duplicates are removed. Save a search to rerun it later, and new publications are flagged. Inqerio can also write your strategy out for Ovid, EBSCOhost and Cochrane.",
+    cap: [[0, "Search twelve databases at once"], [0.5, "Duplicates merge and new papers are flagged"], [0.8, "Export the strategy for Ovid, EBSCOhost or Cochrane"]],
+    html: function () {
+      var dbs = ["PubMed", "Scopus", "Web of Science", "OpenAlex", "ClinicalTrials.gov", "Europe PMC", "Crossref", "…"];
+      var main = '<h3 class="h">Search</h3><p class="sub">One query, every database</p><div class="field mono" id="q"><span data-type="0.06" data-text="(exercise OR physical activity) AND sleep quality"></span></div><div style="display:flex;flex-wrap:wrap;gap:.4em;margin:.8em 0">' +
+        dbs.map(function (d, i) { return '<span class="chip" data-cls="' + (0.28 + i * 0.03).toFixed(2) + ':ok" >' + d + '</span>'; }).join("") + '</div>' +
+        '<div class="grid3" data-at="0.4"><div class="card"><div class="lbl">Records found</div><b style="font:700 2em var(--display)">1,284</b></div><div class="card"><div class="lbl">Duplicates removed</div><b style="font:700 2em var(--display)">819</b></div><div class="card"><div class="lbl">To screen</div><b style="font:700 2em var(--display);color:var(--accent)">465</b></div></div>' +
+        '<div style="display:flex;gap:.5em;margin-top:.9em"><span class="btnm pri" id="runsearch">Run search</span><span class="btnm" id="savesearch" data-at="0.55">Save search</span><span class="btnm" id="expo" data-at="0.8">Export for Ovid</span></div>' +
+        '<div class="card" style="margin-top:.8em" data-at="0.6"><span class="lbl">Saved search · rerun weekly</span><span class="chip ai">3 new publications</span></div>';
+      return app("Evidence", main);
+    }, cur: [[0.22, "#runsearch"], [0.56, "#savesearch"], [0.82, "#expo"]]
+  });
+
+  S.push({
+    id: "review", title: "Run a review", badge: "Evidence · Review",
+    script: "A review starts with its type. Choose from twenty, such as systematic, scoping, rapid or umbrella. Click a type to read its details, then use it. The type sets the question framework, the steps and the extraction form. Screen titles and abstracts, then full texts, with reasons and conflicts recorded. Extract data into your form. Each step tells you when it is finished and offers the next. In appraisal, the AI can suggest answers from the text. You accept or reject them all at once, or check each one, and confirmed answers lock until you update them. A study is marked done only when every answer is in. Finish with a PRISMA 2020 flow diagram.",
+    cap: [[0, "Choose the type of review"], [0.2, "Screen titles and full texts"], [0.4, "Extract data into your form"], [0.58, "Appraise quality with AI suggestions you control"], [0.86, "Report with a PRISMA 2020 diagram"]],
+    html: function () {
+      var st = steps(["Protocol", "Titles", "Full texts", "Extraction", "Appraisal", "Report"], ["0:0.2:cur", "0.2:0.27:cur", "0.27:0.4:cur", "0.4:0.58:cur", "0.58:0.86:cur", "0.86:1.01:cur"].map(function (x, i) { return x.split(":")[0] + ":cur " + x.split(":")[1] + ":done"; }));
+      var types = ["Systematic review", "With meta-analysis", "Scoping review", "Rapid review", "Umbrella review", "Qualitative synthesis", "Living review", "Narrative review"];
+      var A = '<div class="pane" data-win="0:0.2"><h3 class="h">Type of review</h3><div class="grid3" style="grid-template-columns:repeat(4,1fr)">' + types.map(function (t, i) { return '<div class="card" style="padding:.6em .8em" ' + (i === 0 ? 'id="type1"' : '') + '><b class="mini">' + t + '</b></div>'; }).join("") + '</div>' +
+        '<div class="modal" data-win="0.06:0.19"><div class="dialog"><h4>Systematic review</h4><p class="faint mini" style="margin:0 0 .7em">Question framework PICO · Report with PRISMA 2020 · Usually 2 reviewers</p><div style="text-align:right"><span class="btnm pri" id="usetype">Use this type</span></div></div></div></div>';
+      var B = '<div class="pane" data-win="0.2:0.4"><h3 class="h">Screening</h3><div class="list">' + [["Reyes 2021", "Include"], ["Okafor 2019", "Include"], ["Tan 2020", "Exclude · wrong population"]].map(function (r, i) { return '<div class="li" data-at="' + (0.22 + i * 0.04).toFixed(2) + '"><span class="dot ' + (i < 2 ? "is-on" : "") + '"></span><span>' + r[0] + '</span><span class="chip">' + r[1] + '</span></div>'; }).join("") + '</div>' +
+        '<div class="card" style="margin-top:.8em" data-win="0.33:0.4"><b>All caught up</b> · <span class="faint">Every report has been assessed</span><div style="margin-top:.5em"><span class="btnm pri">Go to Extraction</span> <span class="btnm">Back to Titles</span></div></div></div>';
+      var C = '<div class="pane" data-win="0.4:0.58"><h3 class="h">Extraction · Reyes 2021</h3><div class="grid2">' + [["Country", "Canada"], ["Study design", "Randomised trial"], ["Sample size", "165"], ["Age", "Mean 41 (SD 9)"]].map(function (f, i) { return '<div><span class="lbl">' + f[0] + '</span><div class="field"><span data-type="' + (0.42 + i * 0.03).toFixed(2) + '" data-text="' + f[1] + '"></span></div></div>'; }).join("") + '</div><div style="margin-top:.8em;display:flex;align-items:center;gap:.7em"><span class="faint mini">4 of 4 fields filled</span><span class="btnm pri" id="done1" data-at="0.52">Mark as done</span></div></div>';
+      var D = '<div class="pane" data-win="0.58:0.86"><div style="display:flex;justify-content:space-between;align-items:center"><h3 class="h">Appraisal · AMSTAR 2</h3><span class="btnm" id="suggest">Suggest answers with AI</span></div>' +
+        '<div class="card" style="margin:.5em 0;display:flex;align-items:center;gap:.8em" data-at="0.64"><span class="chip ai">3 AI answers to check</span><span style="margin-left:auto" class="btnm" id="acceptall">Accept all</span><span class="btnm">Reject all</span></div>' +
+        [["1  Did the research questions include PICO?", "Yes"], ["2  Was a protocol established first?", "No"], ["3  Was study selection done in duplicate?", "Yes"]].map(function (q, i) { return '<div class="card" style="margin-bottom:.4em;padding:.5em .9em" data-at="' + (0.66 + i * 0.03).toFixed(2) + '"><div class="mini">' + q[0] + '</div><div style="display:flex;gap:.4em;margin-top:.3em;align-items:center"><span class="opt ' + (q[1] === "Yes" ? "good" : "bad") + ' is-on">' + q[1] + '</span><span class="opt" data-cls="0.74:lock">' + (q[1] === "Yes" ? "No" : "Yes") + '</span><span class="chip ai" data-win="0.66:0.74">AI · check this</span><span class="chip ok" data-win="0.74:1.01">Confirmed</span><span class="btnm mini" data-win="0.78:1.01" style="font-size:.75em">Update answer</span></div></div>'; }).join("") + '</div>';
+      var E = '<div class="pane" data-win="0.86:1.01"><h3 class="h">Report</h3><div class="card" style="padding:1em 1.4em;text-align:center"><div class="chip" data-at="0.87">Identified 1,284</div><div style="height:.8em;border-left:2px solid var(--line);width:0;margin:0 auto"></div><div class="chip" data-at="0.89">Screened 465</div><div style="height:.8em;border-left:2px solid var(--line);width:0;margin:0 auto"></div><div class="chip" data-at="0.91">Full texts 67</div><div style="height:.8em;border-left:2px solid var(--line);width:0;margin:0 auto"></div><div class="chip ok" data-at="0.93">Included 12</div></div></div>';
+      return app("Evidence", st + '<div style="position:relative;height:30em">' + A + B + C + D + E + '</div>');
+    }, cur: [[0.08, "#type1"], [0.15, "#usetype"], [0.46, "#done1"], [0.6, "#suggest"], [0.7, "#acceptall"]]
+  });
+
+  S.push({
+    id: "analysis", title: "Plan and run an analysis", badge: "Analysis",
+    script: "In Analysis, write a plan before you look at the results. List your variables, hypotheses and the models you intend to run. Then use the guided builder. Answer a few plain questions about your outcome and your groups, and it recommends a test. Pick the variables, tick the checks you want, and it writes a commented script in R, Python, Stata, SAS or SPSS, in whichever program you have installed. The script is ordinary code that you own and can run anywhere. Beyond regression, the builder covers factor analysis, structural equation models, meta-analysis, machine learning and Bayesian models. You can also open pooled effects from an extraction straight into a meta-analysis.",
+    cap: [[0, "Write the plan first"], [0.25, "Answer a few questions, get a recommended test"], [0.5, "Tick the checks you want"], [0.65, "A commented script in your own program"], [0.88, "Meta-analysis opens straight from your extraction"]],
+    html: function () {
+      var main = '<h3 class="h">Analysis plan</h3><div class="grid2"><div style="display:grid;gap:.6em"><div class="card" data-at="0.05"><span class="lbl">Hypothesis</span>More weekly activity is linked to better sleep scores.</div>' +
+        '<div class="card" data-at="0.15"><span class="lbl">Planned model</span>Linear regression of sleep score on activity, adjusted for age and sex</div>' +
+        '<div class="card" data-at="0.28"><span class="lbl">Guided builder · What do you want to do?</span><div style="display:flex;flex-wrap:wrap;gap:.4em"><span class="opt" id="cmp" data-cls="0.34:is-on">Compare groups</span><span class="opt">Relate two measures</span><span class="opt">Combine studies</span><span class="opt">Predict an outcome</span></div><div style="margin-top:.5em" data-at="0.4"><span class="chip ok">Recommended · Linear regression</span></div></div>' +
+        '<div class="card" data-at="0.5"><span class="lbl">Checks</span><div style="display:flex;gap:.4em;flex-wrap:wrap"><span class="opt" id="chk1" data-cls="0.52:is-on">Residual plots</span><span class="opt" data-cls="0.55:is-on">Normality</span><span class="opt" data-cls="0.58:is-on">Multicollinearity</span><span class="opt">Influential cases</span></div></div></div>' +
+        '<div style="display:grid;gap:.6em;align-content:start"><div class="code" data-at="0.65"><span class="c"># Linear regression of sleep on activity</span>\n<span class="k">m</span> <- lm(sleep ~ activity + age + sex, data = d)\nsummary(m)\n<span class="c"># ---- Residual plots ----</span>\npar(mfrow = c(2, 2)); plot(m)\n<span class="c"># ---- Normality ----</span>\nshapiro.test(residuals(m))</div>' +
+        '<div class="card" data-at="0.88"><span class="lbl">Meta-analysis</span><span class="chip ok">12 pooled effects ready</span> <span class="btnm pri" id="openmeta" style="margin-left:.4em">Open in the guided analysis</span></div></div></div>';
+      return app("Analysis", main);
+    }, cur: [[0.3, "#cmp"], [0.52, "#chk1"], [0.92, "#openmeta"]]
+  });
+
+  S.push({
+    id: "results", title: "Read results and checks", badge: "Analysis · Results",
+    script: "Each fitted model appears under its plan in the Results list, including factor analyses, meta-analyses and machine-learning models. Click one for a plain-language reading, its key figures and what it does not show. Ask the AI to explain more, and it sees the numbers, never your data. Diagnostics run with your script and are explained with a verdict on whether each assumption holds. When a check fails, forks run the question another defensible way, side by side, so you can see where your conclusion changes. Departures from the plan are recorded.",
+    cap: [[0, "Results appear under the plan"], [0.3, "A plain-language reading, never just numbers"], [0.58, "Checks explained with a verdict"], [0.78, "Forks show where conclusions change"]],
+    html: function () {
+      var main = '<div class="grid2" style="grid-template-columns:15em 1fr;height:100%"><div style="display:grid;gap:.5em;align-content:start"><span class="lbl">Results</span>' +
+        [["Linear regression", "n = 165"], ["Random-effects meta-analysis", "12 studies"], ["Factor analysis", "2 factors"]].map(function (r, i) { return '<div class="li" ' + (i === 1 ? 'id="resmeta"' : '') + ' data-at="' + (0.04 + i * 0.05).toFixed(2) + '" data-cls="' + (i === 1 ? "0.26:is-on" : "9:x") + '"><span class="dot is-on"></span><span class="mini">' + r[0] + '</span><span class="faint mini">' + r[1] + '</span></div>'; }).join("") + '</div>' +
+        '<div style="position:relative;min-height:30em"><div class="pane" data-win="0.26:0.56"><h3 class="h">Random-effects meta-analysis</h3><div class="card" style="margin-bottom:.6em"><span class="lbl">How to read it</span>Pooled difference 0.42 (95% CI 0.21 to 0.63). Studies differ moderately (I-squared 48%).</div>' +
+        '<div class="grid3"><div class="card"><div class="lbl">Effect</div><b style="font:700 1.6em var(--display)">0.42</b></div><div class="card"><div class="lbl">I-squared</div><b style="font:700 1.6em var(--display)">48%</b></div><div class="card"><div class="lbl">Studies</div><b style="font:700 1.6em var(--display)">12</b></div></div>' +
+        '<div class="card" style="margin-top:.6em" data-at="0.4"><span class="lbl">Keep in mind</span>A pooled number does not show why studies differ. Look at the forest plot.</div></div>' +
+        '<div class="pane" data-win="0.56:0.76"><h3 class="h">Checks</h3><div class="list">' + [["Residual plots", "Assumption holds", "ok"], ["Normality", "Mild departure, large sample", "ai"], ["Multicollinearity", "Assumption holds", "ok"]].map(function (c, i) { return '<div class="li" data-at="' + (0.58 + i * 0.05).toFixed(2) + '"><span class="dot is-on"></span><span>' + c[0] + '</span><span class="chip ' + c[2] + '">' + c[1] + '</span></div>'; }).join("") + '</div></div>' +
+        '<div class="pane" data-win="0.76:1.01"><h3 class="h">Forks</h3><div class="grid2"><div class="card"><span class="lbl">Original</span><b style="font:700 1.8em var(--display)">0.42</b></div><div class="card" data-at="0.8"><span class="lbl">Robust errors</span><b style="font:700 1.8em var(--display)">0.39</b></div></div><p class="faint mini" data-at="0.88">The conclusion holds either way.</p></div></div></div>';
+      return app("Analysis", main);
+    }, cur: [[0.22, "#resmeta"]]
+  });
+
+  S.push({
+    id: "qual", title: "Code interviews", badge: "Qualitative",
+    script: "In Qualitative, add your recordings and transcribe them into Word transcripts. The recording leaves your computer only if you choose Transcribe and allow it. Read a transcript, highlight a passage and give it a code. Your codebook grows as you work, with definitions and memos. Thematic, framework and content analysis, grounded theory and IPA are supported. Queries and coder agreement help you check consistency, and quotations carry into your manuscript. A topic chart can also suggest groups of words that appear together.",
+    cap: [[0, "Transcribe, read and code"], [0.35, "The codebook grows as you work"], [0.62, "Queries and coder agreement"], [0.82, "Topic chart suggests word groups"]],
+    html: function () {
+      var main = '<div class="grid2" style="grid-template-columns:1.4fr 1fr;height:100%"><div class="card" style="padding:1em 1.3em"><span class="lbl">Interview 03 · Transcript</span><p style="line-height:1.8;margin:.2em 0"><b>Q</b> How did the programme change your week?<br><b>P</b> I started walking before work. <span id="seg" data-cls="0.2:hl">I felt calmer in the evenings</span> and, honestly, I slept through the night for the first time.</p><div style="margin-top:.7em" data-at="0.28"><span class="chip ok">Code · Calmer evenings</span></div></div>' +
+        '<div style="display:grid;gap:.6em;align-content:start"><div class="card" data-at="0.35"><span class="lbl">Codebook</span><div class="list">' + [["Calmer evenings", 6], ["Routine", 9], ["Barriers", 4]].map(function (c, i) { return '<div class="li" style="grid-template-columns:1fr auto"><span class="mini">' + c[0] + '</span><span class="chip">' + c[1] + '</span></div>'; }).join("") + '</div></div>' +
+        '<div class="card" data-at="0.62"><span class="lbl">Coder agreement</span><b style="font:700 1.6em var(--display)">0.81</b> <span class="chip ok">Strong</span></div>' +
+        '<div class="card" data-at="0.82"><span class="lbl">Topics</span>' + [["sleep, evenings, calm", 78], ["walking, routine, work", 64], ["cost, time, barriers", 41]].map(function (t) { return '<div class="mini" style="margin-top:.35em">' + t[0] + '</div><div class="bar on"><i style="--w:' + t[1] + '%"></i></div>'; }).join("") + '</div></div></div>';
+      return app("Qualitative", main);
+    }, cur: [[0.18, "#seg"]]
+  });
+
+  S.push({
+    id: "ethics", title: "Ethics and a second reader", badge: "Ethics · AI review",
+    script: "The ethics consultant reads your protocol and consent form together and points out where they disagree, then checks both against TCPS 2, CIOMS or your own board's checklist. Fix problems before the board sees them. While you write, AI review can act as a second reader in the margin. It flags claims that need a citation and language stronger than the evidence supports. It works only in documents you allow, and only when you switch it on. Anything AI has touched is labelled, and you stay in charge of what goes in.",
+    cap: [[0, "Compare protocol and consent form"], [0.45, "Check against TCPS 2, CIOMS or your board"], [0.65, "A second reader, only where you allow it"]],
+    html: function () {
+      var main = '<h3 class="h">Ethics consultant</h3><div class="grid2"><div class="card" data-at="0.05"><span class="lbl">Protocol</span>Data kept for <b>7 years</b>.</div><div class="card" data-at="0.12"><span class="lbl">Consent form</span>Data kept for <b>5 years</b>.</div></div>' +
+        '<div class="card" style="margin-top:.7em;border-color:rgba(227,169,58,.5)" data-at="0.25"><span class="chip ai">Mismatch</span> The retention period differs between the two documents.</div>' +
+        '<div class="card" style="margin-top:.6em" data-at="0.45"><span class="lbl">Checked against</span><span class="opt is-on">TCPS 2</span> <span class="opt">CIOMS</span> <span class="opt">My board</span></div>' +
+        '<div class="card" style="margin-top:.6em" data-at="0.65"><span class="lbl">AI review · Editor margin</span><span class="chip ai">Needs a citation</span> “Exercise is the best treatment for poor sleep.” <span class="chip ai">Stronger than the evidence</span></div>';
+      return app("Ethics", main);
+    }, cur: []
+  });
+
+  S.push({
+    id: "team", title: "Share with your team", badge: "Team",
+    script: "A project can be shared with colleagues so everyone works from the same copy. Give each person a role to edit, review or only read, and review or code in parallel with conflicts recorded. Team chat sits beside the work. You choose which files AI may read. Free covers writing, references and the local AI. Pro adds Evidence, Analysis, Ethics and AI review. Team adds shared projects and chat. During the beta, invited testers have everything open.",
+    cap: [[0, "Share a project with colleagues"], [0.4, "Roles for editing, reviewing and reading"], [0.7, "Free, Pro and Team"]],
+    html: function () {
+      var main = '<h3 class="h">Shared project</h3><p class="sub">Everyone works from the same copy</p><div class="list">' + [["You", "Owner"], ["Amara", "Editor"], ["Jonas", "Reviewer"], ["Priya", "Viewer"]].map(function (m, i) { return '<div class="li" data-at="' + (0.06 + i * 0.08).toFixed(2) + '"><span class="dot is-on"></span><span>' + m[0] + '</span><span class="chip">' + m[1] + '</span></div>'; }).join("") + '</div>' +
+        '<div class="card" style="margin-top:.7em" data-at="0.5"><span class="lbl">Team chat</span><b class="mini">Amara</b> Screening is done on my side.<br><b class="mini">Jonas</b> Two conflicts left, I will resolve them today.</div>' +
+        '<div class="grid3" style="margin-top:.7em" data-at="0.72"><div class="card"><b>Free</b><div class="faint mini">Editor, references, local AI</div></div><div class="card"><b>Pro</b><div class="faint mini">Evidence, analysis, ethics, AI review</div></div><div class="card"><b>Team</b><div class="faint mini">Shared projects and chat</div></div></div>';
+      return app("Editor", main);
+    }, cur: []
+  });
+
+  S.push({
+    id: "outro", title: "You are ready", badge: "Done",
+    script: "That is the whole tour. Start with a small project, set up the free AI if you want it, and try one workflow end to end. Your files stay on your computer, and your analyses stay traceable. If something looks wrong, use the support link in the app menu to tell us. Thank you for testing the beta.",
+    cap: [[0, "Start small and try one workflow"], [0.55, "Tell us what you find"]],
+    html: function () {
+      return '<div class="hero"><div data-at="0">' + MARK + '</div><h2 data-at="0" style="font-size:3.6em">Thank you for testing</h2><p data-at="0.2">Your files stay on your computer. Your results stay traceable.</p></div>';
+    }, cur: []
+  });
+
+  /* ============ timing ============ */
+  var total = 0;
+  S.forEach(function (s) {
+    var words = s.script.split(/\s+/).length;
+    s.dur = Math.max(18, Math.ceil(words / 2.0) + 3);
+    s.start = total; total += s.dur;
+  });
+
+  /* ============ engine ============ */
+  var $ = function (id) { return document.getElementById(id); };
+  var stage = $("stage"), screen = $("screen"), cap = $("cap"), cursorEl = $("cursor"), badge = $("badge");
+  var T = 0, playing = false, last = 0, cur = -1, speed = 1, voiceOn = false, lastTarget = null;
+  var fmt = function (s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); };
+
+  /* chapters + ticks */
+  var chapters = $("chapters"), ticks = $("ticks");
+  S.forEach(function (s, i) {
+    var b = document.createElement("button"); b.className = "chap"; b.type = "button";
+    b.innerHTML = "<b>" + s.title + "</b><small>" + fmt(s.dur) + "</small>";
+    b.addEventListener("click", function () { seekTo(s.start); });
+    chapters.appendChild(b); s.btn = b;
+    if (i) { var t = document.createElement("i"); t.style.left = (s.start / total * 100) + "%"; ticks.appendChild(t); }
+  });
+
+  function buildScene(i) {
+    cur = i; var s = S[i];
+    screen.innerHTML = s.html(); void screen.offsetWidth;
+    badge.textContent = s.badge;
+    $("stitle").textContent = s.title;
+    $("stext").textContent = s.script;
+    S.forEach(function (x, k) { x.btn.classList.toggle("on", k === i); });
+    var active = S[i].btn; if (active.scrollIntoView) { try { active.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+    lastTarget = null;
+    if (voiceOn && playing) speak(s.script);
+  }
+
+  function parseWin(v) { var p = v.split(":"); return [parseFloat(p[0]), parseFloat(p[1])]; }
+  function applyState(f) {
+    var s = S[cur];
+    screen.querySelectorAll("[data-at]").forEach(function (e) { e.classList.toggle("on", f >= parseFloat(e.getAttribute("data-at"))); });
+    screen.querySelectorAll("[data-win]").forEach(function (e) { var w = parseWin(e.getAttribute("data-win")); e.classList.toggle("on", f >= w[0] && f < w[1]); });
+    screen.querySelectorAll("[data-cls]").forEach(function (e) {
+      var base = e.__base; if (base === undefined) { base = e.__base = e.className.replace(/\s*\bis-on\b|\s*\boff\b|\s*\block\b|\s*\bfull\b|\s*\bok\b|\s*\bhl\b/g, function (m) { return m; }); }
+      e.getAttribute("data-cls").split(/\s+/).forEach(function (tok) {
+        var p = tok.split(":"), at = parseFloat(p[0]), c = p[1]; if (!c) return;
+        if (c === "x") return;
+        if (c === "off") return;
+        if (c === "full") { e.style.width = f >= at ? "100%" : "0"; return; }
+        if (c === "hl2x") return;
+        e.classList.toggle(c, f >= at);
+      });
+    });
+    /* handle 'off' after is-on pairs on rail items: later tokens with off remove is-on */
+    screen.querySelectorAll("[data-cls]").forEach(function (e) {
+      e.getAttribute("data-cls").split(/\s+/).forEach(function (tok) { var p = tok.split(":"); if (p[1] === "off" && f >= parseFloat(p[0])) e.classList.remove("is-on"); });
+    });
+    screen.querySelectorAll("[data-type]").forEach(function (e) {
+      var a = parseFloat(e.getAttribute("data-type")), txt = e.getAttribute("data-text"), p = Math.max(0, Math.min(1, (f - a) / 0.08));
+      e.textContent = txt.slice(0, Math.round(txt.length * p));
+    });
+    /* caption */
+    var c = ""; s.cap.forEach(function (x) { if (f >= x[0]) c = x[1]; }); cap.textContent = c;
+    /* cursor */
+    var tgt = null; (s.cur || []).forEach(function (x) { if (f >= x[0]) tgt = x; });
+    if (!tgt) { cursorEl.hidden = true; lastTarget = null; return; }
+    var el = screen.querySelector(tgt[1]);
+    if (!el) { cursorEl.hidden = true; return; }
+    var sr = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    cursorEl.hidden = false;
+    cursorEl.style.left = (r.left - sr.left + Math.min(r.width * 0.7, r.width - 4)) + "px";
+    cursorEl.style.top = (r.top - sr.top + r.height * 0.6) + "px";
+    if (lastTarget !== tgt[1] && playing && lastTarget !== null) { setTimeout(function () { cursorEl.classList.remove("click"); void cursorEl.offsetWidth; cursorEl.classList.add("click"); }, 900); }
+    lastTarget = tgt[1];
+  }
+
+  function render(seeking) {
+    var i = 0; for (var k = 0; k < S.length; k++) if (T >= S[k].start) i = k;
+    if (seeking) stage.classList.add("seeking");
+    if (i !== cur) buildScene(i);
+    var f = Math.min(1, (T - S[i].start) / S[i].dur);
+    applyState(f);
+    $("seek").value = Math.round(T / total * 1000);
+    if (T > 0.5) $("bigplay").hidden = true;
+    $("time").textContent = fmt(T) + " / " + fmt(total);
+    if (seeking) requestAnimationFrame(function () { requestAnimationFrame(function () { stage.classList.remove("seeking"); }); });
+  }
+
+  function loop(ts) {
+    if (!playing) return;
+    var dt = (ts - last) / 1000; last = ts; T += dt * speed;
+    if (T >= total) { T = total - 0.01; setPlaying(false); }
+    render(false); requestAnimationFrame(loop);
+  }
+  function setPlaying(p) {
+    playing = p; $("bigplay").hidden = p || T > 0.5;
+    $("playlbl").textContent = p ? "Pause" : (T >= total - 0.5 ? "Replay" : "Play");
+    $("playicon").innerHTML = p ? '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>' : '<path d="M6 4l14 8-14 8z"/>';
+    if (p) { last = performance.now(); requestAnimationFrame(loop); if (voiceOn && cur >= 0) speak(S[cur].script); }
+    else stopSpeech();
+  }
+  function seekTo(t) { T = Math.max(0, Math.min(total - 0.01, t)); render(true); if (playing && voiceOn) speak(S[cur].script); }
+
+  /* speech */
+  function stopSpeech() { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {} }
+  function speak(text) {
+    try {
+      if (!window.speechSynthesis) return; stopSpeech();
+      var u = new SpeechSynthesisUtterance(text); u.rate = Math.min(1.4, 0.98 * speed); window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  /* controls */
+  $("play").addEventListener("click", function () { if (T >= total - 0.5) T = 0; setPlaying(!playing); });
+  $("bigplay").addEventListener("click", function () { setPlaying(true); });
+  stage.addEventListener("click", function (e) { if (e.target.closest("#bigplay")) return; setPlaying(!playing); });
+  $("prev").addEventListener("click", function () { var s = S[cur]; seekTo(T - s.start > 3 ? s.start : (S[Math.max(0, cur - 1)].start)); });
+  $("next").addEventListener("click", function () { if (cur < S.length - 1) seekTo(S[cur + 1].start); });
+  $("seek").addEventListener("input", function (e) { seekTo(e.target.value / 1000 * total); });
+  $("speed").addEventListener("change", function (e) { speed = parseFloat(e.target.value); });
+  $("cc").addEventListener("click", function (e) { var on = e.currentTarget.getAttribute("aria-pressed") !== "true"; e.currentTarget.setAttribute("aria-pressed", on); stage.classList.toggle("nocap", !on); });
+  $("voice").addEventListener("click", function (e) { voiceOn = e.currentTarget.getAttribute("aria-pressed") !== "true"; e.currentTarget.setAttribute("aria-pressed", voiceOn); if (voiceOn && playing) speak(S[cur].script); else stopSpeech(); });
+  $("full").addEventListener("click", function () { try { var p = stage.requestFullscreen && stage.requestFullscreen(); if (p && p.catch) p.catch(function () {}); } catch (e) {} });
+  document.addEventListener("keydown", function (e) {
+    if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName) && e.target.type !== "range") return;
+    if (e.code === "Space" && e.target.tagName !== "BUTTON") { e.preventDefault(); setPlaying(!playing); }
+    if (e.key === "ArrowRight") seekTo(T + 5);
+    if (e.key === "ArrowLeft") seekTo(T - 5);
+  });
+  window.addEventListener("resize", function () { if (cur >= 0) applyState(Math.min(1, (T - S[cur].start) / S[cur].dur)); });
+  window.addEventListener("beforeunload", stopSpeech);
+
+  render(true);
+  $("time").textContent = fmt(0) + " / " + fmt(total);
+})();
+</script>
+
+<script>
+(function () {
+  if (window.parent === window || !window.ResizeObserver) return;
+  var send = function () { window.parent.postMessage({ inqerioTourHeight: document.querySelector(".wrap").offsetHeight + 24 }, location.origin); };
+  new ResizeObserver(send).observe(document.body); window.addEventListener("load", send);
+})();
+</script>
+</body>
+</html>

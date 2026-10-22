@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="./assets/media/apple-touch-icon.png">
 <link rel="preload" href="./assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/site.css?v=2c8b6fc778">
+<link rel="stylesheet" href="./assets/site.css?v=c461b2e68b">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -74,6 +74,25 @@
         <div class="works-group"><p>Statistics</p><ul><li>R</li><li>Python</li><li>Jupyter</li><li>Stata</li><li>SAS</li><li>SPSS</li></ul></div><div class="works-group"><p>Documents</p><ul><li>Microsoft Word</li><li>PDF</li><li>PowerPoint</li><li>EPUB</li></ul></div><div class="works-group"><p>Literature</p><ul><li>PubMed</li><li>Scopus</li><li>Web of Science</li><li>Europe PMC</li><li>OpenAlex</li><li>Crossref</li></ul></div>
       </div>
     </div>
+  </div>
+</section>
+<section class="section tour" id="tour" aria-labelledby="t-h">
+  <div class="wrap">
+    <div class="split-head">
+      <h2 id="t-h">See Inqerio in use</h2>
+      <p class="lead">A short tour from installing the beta to finishing a review. Pause at any point, skip between chapters, or turn on captions and read aloud.</p>
+    </div>
+    <div class="tour-frame">
+      <iframe id="tour-player" src="./assets/walkthrough/index.html?embed" title="Inqerio walkthrough" loading="lazy" allow="fullscreen" width="1140" height="760"></iframe>
+      <noscript><p class="tour-note">The walkthrough needs JavaScript to play.</p></noscript>
+    </div>
+    <script>
+      window.addEventListener('message', function (e) {
+        if (e.origin !== location.origin || !e.data || typeof e.data.inqerioTourHeight !== 'number') return;
+        var f = document.getElementById('tour-player');
+        if (f) f.style.height = Math.ceil(e.data.inqerioTourHeight) + 'px';
+      });
+    </script>
   </div>
 </section>
 <section class="section story" aria-labelledby="s-h">
