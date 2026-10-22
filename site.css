@@ -485,3 +485,7 @@ body { font-size: var(--fs-body); }
 .plan-how { font-size: 0.85rem; padding-top: 12px; }
 .plan-main .plan-flag { top: 24px; right: 24px; font-size: 0.62rem; padding: 2px 9px; }
 @media (max-width: 960px) { .plan { padding: 22px 20px 20px; } .plan-main .plan-flag { top: 22px; right: 20px; } }
+
+/* One continuous table, with round tick and cross marks. */
+.compare td.yes .tick { display: inline-block; box-sizing: border-box; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--teal); color: #fff; vertical-align: middle; }
+.compare td .cross { box-sizing: border-box; width: 22px; height: 22px; padding: 5px; border-radius: 50%; background: #d3dbde; color: #fff; }
