@@ -555,3 +555,4 @@ body { font-size: var(--fs-body); }
 /* Flat cards, not floating, and room above the contact line. */
 .table-wrap, .faq-list { box-shadow: none; }
 .faq-more { margin-top: 32px; padding-bottom: 8px; font-size: 0.95rem; }
+.faq-more { margin-top: 44px; }
