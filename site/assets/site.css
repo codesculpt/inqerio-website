@@ -884,3 +884,16 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 .ver-files { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 0; }
 .ver-files .btn { gap: 0.4rem; }
 .btn.is-waiting, .btn.is-waiting:hover { background: var(--rule); border-color: var(--rule); color: var(--quiet); cursor: default; transform: none; box-shadow: none; }
+
+/* Contact form */
+.contact-main { grid-column: span 2; grid-row: span 2; }
+.contact-grid { row-gap: 1.6rem; align-items: start; }
+.contact-form { display: grid; gap: 0.9rem; margin: 0.4rem 0 1rem; }
+.cf-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+.contact-form label { display: grid; gap: 0.3rem; font-size: var(--fs-small); font-weight: 600; color: var(--navy); }
+.contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 0.6rem 0.7rem; border: 1px solid var(--rule-strong, #c3cfcc); border-radius: 8px; background: var(--paper); color: var(--text); font: 400 var(--fs-body)/1.5 var(--sans); }
+.contact-form textarea { resize: vertical; min-height: 9rem; }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: 2px solid var(--teal); outline-offset: 1px; border-color: var(--teal); }
+.contact-form .btn { justify-self: start; }
+.cf-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+@media (max-width: 720px) { .cf-row { grid-template-columns: 1fr; } .contact-main { grid-column: auto; grid-row: auto; } }
