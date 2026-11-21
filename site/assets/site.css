@@ -275,15 +275,6 @@ strong { font-weight: 600; color: var(--navy); }
 .contact-grid > div { padding-top: 26px; border-top: 1px solid var(--rule); }
 .contact-grid h2 { font-size: 1.65rem; }
 .contact-grid .btn { white-space: normal; text-align: center; }
-.download-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-.download-card { padding: 28px; border: 1px solid var(--rule-strong); border-radius: 6px; background: var(--paper); }
-.download-card h2 { font-size: 1.65rem; margin: 0 0 6px; }
-.download-card .btn { white-space: normal; text-align: center; }
-.download-steps { margin: 18px 0 0; padding-left: 20px; line-height: 1.7; }
-.download-notes { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--rule); max-width: 74ch; }
-.download-notes h2 { font-size: 1.65rem; }
-.download-notes ul { padding-left: 20px; line-height: 1.75; }
-@media (max-width: 720px) { .download-grid { grid-template-columns: 1fr; } }
 .message { max-width: 68ch; }
 .message .actions { margin-top: 28px; }
 
@@ -827,3 +818,39 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 /* The cue is a link to the next part of the page, so it can be pressed. Without scroll-linked animation it is not shown. */
 .scroll-cue { display: none; }
 @supports (animation-timeline: view()) { .scroll-cue { display: block; } .scroll-cue:hover { color: var(--teal-deep, #0c6762); } }
+
+/* Download page: the two installers sit on cards that rise into the title band */
+.dl-head { padding-bottom: clamp(5.5rem, 10vw, 7.5rem); }
+.dl-head .lead { max-width: 36rem; }
+.dl-chips { display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; margin: 1.2rem 0 0; padding: 0; list-style: none; }
+.dl-chips li { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem 0.35rem 0.6rem; border-radius: 999px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.22); color: #fff; font-size: var(--fs-small); font-weight: 500; }
+.dl-chips .tick { color: var(--mint); flex: none; }
+.dl-main { padding-top: 0; }
+.dl-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 1.6rem); margin-top: clamp(-5.5rem, -8vw, -4rem); position: relative; z-index: 1; }
+.dl-card { display: flex; flex-direction: column; padding: clamp(1.3rem, 2.6vw, 1.9rem); border-radius: 16px; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 24px 48px -28px rgba(6, 56, 75, 0.45), 0 2px 6px -2px rgba(6, 56, 75, 0.12); transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease); }
+.dl-card:hover { transform: translateY(-3px); box-shadow: 0 30px 56px -28px rgba(6, 56, 75, 0.55), 0 2px 6px -2px rgba(6, 56, 75, 0.12); }
+.dl-card-top { display: flex; align-items: center; gap: 0.9rem; }
+.dl-os { display: grid; place-items: center; width: 52px; height: 52px; flex: none; border-radius: 14px; background: linear-gradient(135deg, #06384b, #117f79); color: #fff; box-shadow: 0 10px 20px -10px rgba(6, 56, 75, 0.7); }
+.dl-card h2 { font-size: 1.5rem; margin: 0; }
+.dl-req { margin: 0.15rem 0 0; color: var(--quiet); font-size: var(--fs-meta); }
+.dl-btn { display: flex; width: 100%; gap: 0.55rem; margin-top: 1.3rem; min-height: 3.25rem; font-size: 1.02rem; border-radius: 10px; white-space: normal; text-align: center; }
+.dl-file { margin: 0.6rem 0 0; text-align: center; color: var(--quiet); font-size: var(--fs-small); }
+.dl-steps { margin: 1.3rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--rule); list-style: none; counter-reset: dl; display: grid; gap: 0.7rem; font-size: var(--fs-meta); line-height: 1.5; }
+.dl-steps li { counter-increment: dl; display: grid; grid-template-columns: 1.7rem 1fr; gap: 0.7rem; align-items: start; }
+.dl-steps li::before { content: counter(dl); display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: rgba(17, 127, 121, 0.12); color: var(--teal-dark); font: 700 0.82rem/1 var(--display); }
+.dl-know { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
+.dl-know > h2 { font-size: 1.5rem; padding-bottom: 0.9rem; border-bottom: 2px solid var(--teal); margin-bottom: 0; }
+.dl-points { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 1.8rem); margin-top: 1.3rem; }
+.dl-point h3 { font-size: 1.02rem; margin-bottom: 0.3rem; }
+.dl-point p { margin: 0; color: var(--quiet); font-size: var(--fs-meta); line-height: 1.55; }
+.dl-shot { margin: clamp(2.4rem, 5vw, 3.4rem) 0 0; }
+/* The screenshot fades into the page by itself (built into the image), so no frame. */
+.dl-shot picture { display: block; }
+.dl-shot img { width: 100%; }
+.dl-help { margin: 1.8rem 0 0; color: var(--quiet); font-size: var(--fs-meta); max-width: 70ch; }
+@media (max-width: 900px) { .dl-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .dl-grid { grid-template-columns: 1fr; }
+  .dl-points { grid-template-columns: 1fr; }
+}
+@media (hover: none) { .dl-card:hover { transform: none; } }
