@@ -805,3 +805,12 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
   .compare thead th .rec-flag { display: none; }
   .compare thead th:not(:first-child) { width: 1%; padding-inline: 9px; }
 }
+
+/* The narrowest phones: the plan columns take only what a tick needs, so the feature names wrap less. */
+@media (max-width: 380px) {
+  .compare thead th:not(:first-child) { padding-inline: 5px; }
+  .compare th, .compare td { padding: 9px 2px; }
+  .compare th[scope='row'] { padding-left: 10px; padding-right: 6px; }
+  .compare .th-name { font-size: 0.76rem; }
+  .compare .feat { font-size: 0.86rem; line-height: 1.3; }
+}
