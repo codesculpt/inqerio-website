@@ -275,6 +275,15 @@ strong { font-weight: 600; color: var(--navy); }
 .contact-grid > div { padding-top: 26px; border-top: 1px solid var(--rule); }
 .contact-grid h2 { font-size: 1.65rem; }
 .contact-grid .btn { white-space: normal; text-align: center; }
+.download-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.download-card { padding: 28px; border: 1px solid var(--rule-strong); border-radius: 6px; background: var(--paper); }
+.download-card h2 { font-size: 1.65rem; margin: 0 0 6px; }
+.download-card .btn { white-space: normal; text-align: center; }
+.download-steps { margin: 18px 0 0; padding-left: 20px; line-height: 1.7; }
+.download-notes { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--rule); max-width: 74ch; }
+.download-notes h2 { font-size: 1.65rem; }
+.download-notes ul { padding-left: 20px; line-height: 1.75; }
+@media (max-width: 720px) { .download-grid { grid-template-columns: 1fr; } }
 .message { max-width: 68ch; }
 .message .actions { margin-top: 28px; }
 
