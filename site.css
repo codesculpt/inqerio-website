@@ -854,3 +854,4 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
   .dl-points { grid-template-columns: 1fr; }
 }
 @media (hover: none) { .dl-card:hover { transform: none; } }
+.dl-btn.is-waiting, .dl-btn.is-waiting:hover { background: var(--rule); border-color: var(--rule); color: var(--quiet); cursor: default; transform: none; box-shadow: none; }
