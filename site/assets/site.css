@@ -874,15 +874,27 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 .learn-text a { margin-top: auto; padding-top: 0.5rem; font-weight: 600; font-size: var(--fs-meta); align-self: flex-start; }
 
 /* Versions: each released version with what changed and its installers */
-.ver-list { display: grid; gap: 1rem; max-width: 52rem; }
-.ver { padding: 1.3rem 1.4rem; border-radius: 14px; background: var(--paper); border: 1px solid var(--rule); }
+.ver-list { list-style: none; margin: 0; padding: 0; max-width: 46rem; }
+.ver { padding: 1.4rem 0; border-top: 1px solid var(--rule); }
+.ver-list > .ver:first-child { border-top: 0; padding-top: 0; }
+.ver.is-latest { padding: 0 0 1.6rem 1.1rem; border-left: 3px solid var(--teal); }
 .ver-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; }
-.ver-head h2 { font-size: 1.3rem; margin: 0; }
-.ver-latest { padding: 0.1rem 0.6rem; border-radius: 999px; background: rgba(17, 127, 121, 0.12); color: var(--teal-dark); font-size: var(--fs-small); font-weight: 600; }
-.ver-date { margin-left: auto; color: var(--quiet); font-size: var(--fs-meta); }
-.ver ul { margin: 0.8rem 0 0; padding-left: 1.2rem; font-size: var(--fs-meta); line-height: 1.6; }
-.ver-files { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 0; }
-.ver-files .btn { gap: 0.4rem; }
+.ver-head h2 { font-size: 1.1rem; margin: 0; }
+.ver.is-latest .ver-head h2 { font-size: 1.4rem; }
+.ver-latest { color: var(--teal-dark); font-size: var(--fs-small); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.ver-date { margin-left: auto; color: var(--quiet); font-size: var(--fs-small); }
+.ver ul { margin: 0.6rem 0 0; padding-left: 1.1rem; color: var(--text); font-size: var(--fs-meta); line-height: 1.6; }
+.ver-files { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.6rem; margin: 0.7rem 0 0; font-size: var(--fs-meta); }
+.ver-files a { font-weight: 600; }
+.ver-wait, .ver-sep { color: var(--quiet); }
+.ver-older { max-width: 46rem; margin-top: 0.4rem; border-top: 1px solid var(--rule); }
+.ver-older > summary { display: flex; align-items: center; gap: 0.5rem; padding: 1rem 0; color: var(--navy); font-weight: 600; cursor: pointer; list-style: none; }
+.ver-older > summary::-webkit-details-marker { display: none; }
+.ver-older > summary::before { content: ""; width: 7px; height: 7px; margin: 0 4px 2px 2px; border-right: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); transition: transform 0.15s; }
+.ver-older[open] > summary::before { transform: rotate(45deg); }
+.ver-older > summary:hover { color: var(--teal-dark); }
+.ver-count { color: var(--quiet); font-weight: 400; font-size: var(--fs-small); }
+.ver-older .ver-list > .ver:first-child { padding-top: 0.4rem; }
 .btn.is-waiting, .btn.is-waiting:hover { background: var(--rule); border-color: var(--rule); color: var(--quiet); cursor: default; transform: none; box-shadow: none; }
 
 /* Contact form */
