@@ -869,3 +869,15 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 @media (hover: none) { .learn-card:hover { transform: none; } }
 .learn-video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #06384b; }
 .learn-text a { margin-top: auto; padding-top: 0.5rem; font-weight: 600; font-size: var(--fs-meta); align-self: flex-start; }
+
+/* Versions: each released version with what changed and its installers */
+.ver-list { display: grid; gap: 1rem; max-width: 52rem; }
+.ver { padding: 1.3rem 1.4rem; border-radius: 14px; background: var(--paper); border: 1px solid var(--rule); }
+.ver-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; }
+.ver-head h2 { font-size: 1.3rem; margin: 0; }
+.ver-latest { padding: 0.1rem 0.6rem; border-radius: 999px; background: rgba(17, 127, 121, 0.12); color: var(--teal-dark); font-size: var(--fs-small); font-weight: 600; }
+.ver-date { margin-left: auto; color: var(--quiet); font-size: var(--fs-meta); }
+.ver ul { margin: 0.8rem 0 0; padding-left: 1.2rem; font-size: var(--fs-meta); line-height: 1.6; }
+.ver-files { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 0; }
+.ver-files .btn { gap: 0.4rem; }
+.btn.is-waiting, .btn.is-waiting:hover { background: var(--rule); border-color: var(--rule); color: var(--quiet); cursor: default; transform: none; box-shadow: none; }
