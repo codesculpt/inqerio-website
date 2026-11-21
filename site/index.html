@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="./assets/media/apple-touch-icon.png">
 <link rel="preload" href="./assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/site.css?v=2c8b6fc778">
+<link rel="stylesheet" href="./assets/site.css?v=ca0bf650d7">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -42,32 +42,35 @@
 <main id="main" class="page-home">
 
 <section class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-logo">
-      <img src="./assets/brand/logo-colour.png" alt="Inqerio, Your intelligent research workspace" width="380" height="246">
-    </div>
-    <div class="hero-text">
-      <h1>Deliver more evidence, faster, and defend every result.</h1>
-      <p class="lead">Inqerio is a desktop workspace in which researchers conduct systematic reviews, analyse their data and write their manuscripts, with every result traceable to its source. It is designed to extend what a single researcher can deliver. The built-in AI explains and flags, but every decision stays with you.</p>
-      <p class="actions"><a class="btn btn-lg" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a><a class="btn btn-ghost btn-lg" href="./pricing/">See plans and prices</a></p>
-      <p class="hero-note">Beta 94, November 2026. Free to start, with no account required. Your files remain on your computer.</p>
-    </div>
-  </div>
-</section>
-<section class="showcase" aria-label="Writing in Inqerio">
   <div class="wrap">
+    <div class="hero-in">
+      <div class="hero-text">
+        <div class="lockup"><img class="lockup-icon" src="./assets/brand/mark-colour.png" alt="" width="52" height="52"><div><span class="word">Inqerio</span><span class="tag">Your intelligent research workspace</span></div></div>
+        <h1>Careful research, delivered when it is needed most.</h1>
+        <p class="lead">Research that drives evidence-informed solutions has never been more urgent. We built Inqerio so that researchers can conduct systematic reviews, analyse their data and write their manuscripts in one desktop workspace, with every result traceable to its source. The built-in AI explains and flags, and every decision stays with you.</p>
+        <p class="actions"><a class="btn btn-lg" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a><a class="btn btn-ghost btn-lg" href="./pricing/">See plans and prices</a></p>
+        <p class="hero-note">Beta 94, November 2026. Free to start, with no account required. Your files remain on your computer.</p>
+      </div>
+      <aside class="facts" aria-label="Inqerio at a glance">
+        <h2>At a glance</h2>
+        <ul class="proof">
+          <li><b>12</b><span>databases searched from a single interface</span></li>
+          <li><b>17</b><span>citation styles, switched in one step</span></li>
+          <li><b>5</b><span>statistical programs supported, including R and Python</span></li>
+          <li><b>0</b><span>analytics or tracking components in the app</span></li>
+        </ul>
+      </aside>
+    </div>
     <figure class="shot">
       <picture>
         <source media="(max-width: 720px)" srcset="./assets/media/app-view-mobile.webp" width="900" height="781">
         <img src="./assets/media/app-view-1440.webp" srcset="./assets/media/app-view-1440.webp 1440w, ./assets/media/app-view-2400.webp 2400w" sizes="(max-width: 1188px) 100vw, 1140px" width="1440" height="818" alt="The Inqerio editor with a project's files and a manuscript open. A curved band in the brand colours covers the rest of the window." loading="eager">
       </picture>
     </figure>
-    <ul class="proof" aria-label="Inqerio at a glance">
-      <li><b>12</b><span>databases searched from a single interface</span></li>
-      <li><b>17</b><span>citation styles, switched in one step</span></li>
-      <li><b>5</b><span>statistical programs supported, including R and Python</span></li>
-      <li><b>0</b><span>analytics or tracking components in the app</span></li>
-    </ul>
+  </div>
+</section>
+<section class="showcase" aria-label="Works with Inqerio">
+  <div class="wrap">
     <div class="works">
       <p class="works-title">Works with the tools you already use</p>
       <div class="works-groups">
@@ -83,14 +86,14 @@
       <p class="lead">The questions that researchers face are growing more complex, yet the tools have not kept pace. A single study may involve a reference manager, a spreadsheet, a statistics package, a transcription service, a word processor and a folder of correspondence. Time is lost moving work between them, and it becomes harder to trace a result in the manuscript back to the data and analysis that produced it.</p>
     </div>
     <div class="journey">
-      <article class="journey-item"><p class="pain">A single study is spread across a dozen programs.</p><div class="answer"><h3>One workspace for the whole study</h3><p>Searches, references, data, scripts, interviews and the manuscript are kept in one project. Less time is spent moving work between programs, and more is spent completing it.</p><ul class="chips"><li>Editor</li><li>References</li><li>Evidence</li><li>Analysis</li></ul></div></article><article class="journey-item"><p class="pain">Reviews, analysis and writing consume time that is difficult to spare.</p><div class="answer"><h3>Less time on repetitive work</h3><p>Run a systematic review from one place. Search twelve databases at once, screen titles, abstracts and full texts with reasons and conflicts recorded, extract data, appraise quality and generate your PRISMA diagram, with a complete audit trail. The guided analysis builder turns a research question into a commented script. Interviews can be transcribed, and citation styles changed, in a single step. Routine tasks take less time, which leaves more for interpretation.</p><ul class="chips"><li>Systematic review</li><li>12 databases</li><li>Guided analysis builder</li><li>Transcription</li><li>17 citation styles</li></ul></div></article><article class="journey-item"><p class="pain">Too many published results cannot be traced back to the data and analysis behind them.</p><div class="answer"><h3>Reproducible by design</h3><p>Record the analysis plan before the analysis begins. Every script is plain code that you own and can run outside Inqerio, and results link into the manuscript. Forks test one question in several defensible ways, departures from the plan are recorded, and the version history allows any earlier draft to be restored. A project can be packaged with a checksum for every file, so a reviewer can follow the full trail.</p><ul class="chips"><li>Analysis plans</li><li>Linked results</li><li>Forks</li><li>Versions</li><li>Verifiable packages</li></ul></div></article><article class="journey-item"><p class="pain">AI can assist, but data and professional judgement cannot be handed over.</p><div class="answer"><h3>AI that advises and does not decide</h3><p>The free AI runs on your own computer. It reads only the files that you permit, text is never sent without your consent, and any content that AI has touched is labelled. It explains and flags, and you make the decisions.</p><ul class="chips"><li>Local AI</li><li>AI access</li><li>AI review</li><li>Inqerio AI</li></ul></div></article><article class="journey-item"><p class="pain">Ethics approval and collaboration take time.</p><div class="answer"><h3>Fewer revisions and easier collaboration</h3><p>The ethics consultant compares your protocol with your consent form before the board reviews them. Projects can be shared with up to five colleagues, end-to-end encrypted, with defined roles for editing, reviewing and coding in parallel.</p><ul class="chips"><li>Ethics consultant</li><li>Team chat and sharing</li><li>Roles</li></ul></div></article>
+      <article class="journey-item"><p class="pain">A single study is spread across a dozen programs.</p><div class="answer"><h3>One workspace for the whole study</h3><p>We keep your searches, references, data, scripts, interviews and manuscript in one project, so you spend less time moving work between programs and more time completing it.</p><ul class="chips"><li>Editor</li><li>References</li><li>Evidence</li><li>Analysis</li></ul></div></article><article class="journey-item"><p class="pain">Reviews, analysis and writing consume time that is difficult to spare.</p><div class="answer"><h3>Less time on repetitive work</h3><p>Run a systematic review from one place. Search twelve databases at once, screen titles, abstracts and full texts with reasons and conflicts recorded, extract data, appraise quality and generate your PRISMA diagram, with a complete audit trail. The guided analysis builder turns a research question into a commented script. Interviews can be transcribed, and citation styles changed, in a single step. Routine tasks take less time, which leaves more for interpretation.</p><ul class="chips"><li>Systematic review</li><li>12 databases</li><li>Guided analysis builder</li><li>Transcription</li><li>17 citation styles</li></ul></div></article><article class="journey-item"><p class="pain">Too many published results cannot be traced back to the data and analysis behind them.</p><div class="answer"><h3>Reproducible by design</h3><p>Record the analysis plan before the analysis begins. Every script is plain code that you own and can run outside Inqerio, and results link into the manuscript. Forks test one question in several defensible ways, departures from the plan are recorded, and the version history allows any earlier draft to be restored. A project can be packaged with a checksum for every file, so a reviewer can follow the full trail.</p><ul class="chips"><li>Analysis plans</li><li>Linked results</li><li>Forks</li><li>Versions</li><li>Verifiable packages</li></ul></div></article><article class="journey-item"><p class="pain">AI can assist, but data and professional judgement cannot be handed over.</p><div class="answer"><h3>AI that advises and does not decide</h3><p>The free AI runs on your own computer. It reads only the files that you permit, text is never sent without your consent, and any content that AI has touched is labelled. It explains and flags, and you make the decisions.</p><ul class="chips"><li>Local AI</li><li>AI access</li><li>AI review</li><li>Inqerio AI</li></ul></div></article><article class="journey-item"><p class="pain">Ethics approval and collaboration take time.</p><div class="answer"><h3>Fewer revisions and easier collaboration</h3><p>The ethics consultant compares your protocol with your consent form before the board reviews them. Projects can be shared with up to five colleagues, end-to-end encrypted, with defined roles for editing, reviewing and coding in parallel.</p><ul class="chips"><li>Ethics consultant</li><li>Team chat and sharing</li><li>Roles</li></ul></div></article>
     </div>
   </div>
 </section>
 <section class="band mission" aria-labelledby="m-h">
   <div class="wrap">
     <h2 id="m-h">Scientific evidence has never mattered more.</h2>
-    <p>Health, climate and many other global challenges are becoming more complex, and the decisions that address them depend on sound evidence. Researchers need tools that increase their capacity to deliver, so that work is completed faster and more efficiently, and in a form that others can verify and reproduce. That is the purpose of Inqerio.</p>
+    <p>With climate change on the rise, global health crises have become an everyday lived experience for most people, and the decisions that address them depend on sound evidence. Researchers need tools that help them do rapid but careful work, in a form that others can verify and reproduce. That is why we built Inqerio.</p>
   </div>
 </section>
 <section class="section" aria-labelledby="f-h">
@@ -108,7 +111,7 @@
   <div class="wrap band-in">
     <div>
       <h2 id="p-h">Your research remains yours.</h2>
-      <p>Projects, documents, data and notes are ordinary files in folders that you choose. We do not keep a copy of your work.</p>
+      <p>Your research can represent years of work, so it stays in your hands. Projects, documents, data and notes are ordinary files in folders that you choose. We do not keep a copy of your work.</p>
       <p><a href="./privacy/">Read the privacy policy</a></p>
     </div>
     <dl class="promises">
@@ -166,7 +169,7 @@
 <section class="cta">
   <div class="wrap cta-in">
     <h2>Begin your next study in Inqerio.</h2>
-    <p>Beta 94 is free to start on Windows. No account is required, and your files remain on your computer.</p>
+    <p>Beta 94 is free to start on Windows and Mac. No account is required, and your files remain on your computer.</p>
     <p class="actions"><a class="btn btn-light" href="mailto:support@inqerio.com?subject=Inqerio%20beta">Join the beta</a><a class="btn btn-outline-light" href="./pricing/">See pricing</a></p>
   </div>
 </section>
@@ -201,9 +204,9 @@
     <div class="foot-base">
       <div class="made">
         <img src="./assets/brand/crest-black.png" alt="" width="30" height="28">
-        <p>Made by <a class="maker" href="https://www.codesculpt.ca/" rel="noopener"><strong>CodeSculpt</strong></a> in Ontario, Canada</p>
+        <p>Made by <a class="maker" href="https://www.codesculpt.ca/" target="_blank" rel="noopener"><strong>CodeSculpt</strong><span class="sr"> (opens in a new tab)</span></a> in Ontario, Canada</p>
       </div>
-      <p>© 2026 <a class="maker" href="https://www.codesculpt.ca/" rel="noopener">CodeSculpt</a></p>
+      <p>© 2026 <a class="maker" href="https://www.codesculpt.ca/" target="_blank" rel="noopener">CodeSculpt<span class="sr"> (opens in a new tab)</span></a></p>
     </div>
   </div>
 </footer>
