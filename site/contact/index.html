@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="../assets/media/apple-touch-icon.png">
 <link rel="preload" href="../assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/site.css?v=ecc46397d4">
+<link rel="stylesheet" href="../assets/site.css?v=ca2153cf55">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -48,9 +48,9 @@
 <section id="more" class="section section-tight">
   <div class="wrap">
     <div class="contact-grid">
-      <div class="contact-main">
+      <div class="contact-main contact-card">
         <h2>Write to us</h2>
-        <p>This is the quickest way to reach us about any matter. We reply by email.</p>
+        <p class="contact-intro">This is the quickest way to reach us about any matter. We reply by email.</p>
         <form class="contact-form" method="post" action="https://gypqdlfnhklvvltepewx.supabase.co/functions/v1/contact">
           <div class="cf-row">
             <label>Your name<input type="text" name="name" autocomplete="name" maxlength="120"></label>
@@ -62,20 +62,15 @@
           </div>
           <label>Your message<textarea name="message" rows="7" minlength="10" maxlength="5000" required></textarea></label>
           <label class="cf-trap" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-          <button class="btn" type="submit">Send message</button>
+          <button class="btn btn-lg" type="submit">Send message</button>
         </form>
-        <p class="small">Please include the version number of the installed app and, for account questions, the email address that you use to sign in. To keep your data safe, please do not send passwords, card numbers or other sensitive information.</p>
+        <p class="small contact-note">Please include the version number of the installed app and, for account questions, the email address that you use to sign in. To keep your data safe, please do not send passwords, card numbers or other sensitive information.</p>
       </div>
-      <div>
+      <aside class="contact-side">
         <h2>Payments and receipts</h2>
         <p>We do not handle payments ourselves. Stripe handles them as reseller, so for any question about a charge, please use the support link in your Stripe receipt.</p>
-        <p><a href="../refunds/">Refunds and cancelling</a></p>
-      </div>
-      <div>
-        <h2>Who we are</h2>
-        <p>Inqerio is made by CodeSculpt, Ontario, Canada.</p>
-        <p><a href="../privacy/">Privacy policy</a></p>
-      </div>
+        <p class="contact-links"><a href="../refunds/">Refunds and cancelling</a><a href="../privacy/">Privacy policy</a></p>
+      </aside>
     </div>
   </div>
 </section>
