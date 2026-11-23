@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="../assets/media/apple-touch-icon.png">
 <link rel="preload" href="../assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/site.css?v=ed2688378f">
+<link rel="stylesheet" href="../assets/site.css?v=1acf6eeda9">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -74,8 +74,8 @@
           <span class="dl-os" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="5" width="15" height="10.5" rx="1.6"/><path d="M2.5 19h19"/></svg></span>
           <div><h2>Mac</h2><p class="dl-req">macOS 11 or later, Apple silicon and Intel</p></div>
         </div>
-        <span class="btn dl-btn is-waiting" aria-disabled="true">Available shortly</span>
-        <p class="dl-file">Version 1.0.31 for Mac is being prepared. Please check back in a little while.</p>
+        <a class="btn dl-btn" href="https://github.com/codesculpt/inqerio-releases/releases/download/v1.0.31/Inqerio-1.0.31-mac.dmg"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>Download for Mac</a>
+        <p class="dl-file">Disk image (.dmg), Version 1.0.31</p>
         <ol class="dl-steps">
           <li>Open the file you downloaded.</li>
           <li>Drag Inqerio into the Applications folder.</li>
@@ -85,14 +85,14 @@
       <article class="dl-card">
         <div class="dl-card-top">
           <span class="dl-os" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="m7.5 9.5 3 2.5-3 2.5"/><path d="M13 15h3.5"/></svg></span>
-          <div><h2>Linux</h2><p class="dl-req">64-bit, Ubuntu 22.04 or later, Debian 12 or later, or a system built on them such as Zorin OS, Linux Mint and Pop!_OS</p></div>
+          <div><h2>Linux</h2><p class="dl-req">Ubuntu, Debian, Zorin OS, Linux Mint, 64-bit</p></div>
         </div>
         <a class="btn dl-btn" href="https://github.com/codesculpt/inqerio-releases/releases/download/v1.0.31/Inqerio-1.0.31-linux.deb"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>Download for Linux</a>
         <p class="dl-file">Package (.deb), Version 1.0.31</p>
         <ol class="dl-steps">
-          <li>Open the file's folder in a terminal. It is usually the Downloads folder. Your browser may warn about a file it does not see often, so choose Keep.</li>
-          <li>Install it with <code>sudo apt install ./Inqerio-1.0.31-linux.deb</code></li>
-          <li>Open Inqerio from your applications menu.</li>
+          <li><span>Download the file. If your browser warns about it, choose Keep.</span></li>
+          <li><span>Open a terminal in the Downloads folder and run <code>sudo apt install ./Inqerio-1.0.31-linux.deb</code></span></li>
+          <li><span>Open Inqerio from your applications menu.</span></li>
         </ol>
         <p class="dl-alt">Another kind of Linux, or no administrator rights? Download the <a href="https://github.com/codesculpt/inqerio-releases/releases/download/v1.0.31/Inqerio-1.0.31-linux.AppImage">AppImage</a>, allow it to run with <code>chmod +x Inqerio-1.0.31-linux.AppImage</code> and open it.</p>
         <details class="dl-sum"><summary>Check the download</summary><p>Run <code>sha256sum Inqerio-1.0.31-linux.deb</code> in the terminal. It should print:</p><p><code>c5ac219a2596121e57e999f08b6d4e276e889bed3ada0652eabbcf7e9edbba9c</code></p><p>For the AppImage:</p><p><code>0f294c7bf8ab0732825be9b06e23eed648b0ca3dfb358be82616a4bd3cb0b5e6</code></p></details>
