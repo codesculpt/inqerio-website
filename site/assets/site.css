@@ -843,6 +843,10 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 .dl-steps li::before { content: counter(dl); display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: rgba(17, 127, 121, 0.12); color: var(--teal-dark); font: 700 0.82rem/1 var(--display); }
 .dl-steps code, .dl-alt code { padding: 0.1rem 0.4rem; border-radius: 6px; background: rgba(6, 56, 75, 0.08); font-size: 0.86em; overflow-wrap: anywhere; }
 .dl-alt { margin: 1.1rem 0 0; color: var(--quiet); font-size: var(--fs-small); line-height: 1.5; }
+.dl-sum { margin: 1rem 0 0; color: var(--quiet); font-size: var(--fs-small); line-height: 1.5; }
+.dl-sum summary { cursor: pointer; font-weight: 600; }
+.dl-sum p { margin: 0.5rem 0 0; }
+.dl-sum code { padding: 0.1rem 0.4rem; border-radius: 6px; background: rgba(6, 56, 75, 0.08); font-size: 0.86em; overflow-wrap: anywhere; }
 .dl-know { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 .dl-know > h2 { font-size: 1.5rem; padding-bottom: 0.9rem; border-bottom: 2px solid var(--teal); margin-bottom: 0; }
 .dl-points { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 1.8rem); margin-top: 1.3rem; }
