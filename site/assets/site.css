@@ -841,6 +841,8 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 .dl-steps { margin: 1.3rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--rule); list-style: none; counter-reset: dl; display: grid; gap: 0.7rem; font-size: var(--fs-meta); line-height: 1.5; }
 .dl-steps li { counter-increment: dl; display: grid; grid-template-columns: 1.7rem 1fr; gap: 0.7rem; align-items: start; }
 .dl-steps li::before { content: counter(dl); display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: rgba(17, 127, 121, 0.12); color: var(--teal-dark); font: 700 0.82rem/1 var(--display); }
+.dl-steps code, .dl-alt code { padding: 0.1rem 0.4rem; border-radius: 6px; background: rgba(6, 56, 75, 0.08); font-size: 0.86em; overflow-wrap: anywhere; }
+.dl-alt { margin: 1.1rem 0 0; color: var(--quiet); font-size: var(--fs-small); line-height: 1.5; }
 .dl-know { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 .dl-know > h2 { font-size: 1.5rem; padding-bottom: 0.9rem; border-bottom: 2px solid var(--teal); margin-bottom: 0; }
 .dl-points { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 1.8rem); margin-top: 1.3rem; }
@@ -851,6 +853,8 @@ a[target='_blank']::after { content: ''; display: inline-block; width: 0.62em; h
 .dl-shot picture { display: block; }
 .dl-shot img { width: 100%; }
 .dl-help { margin: 1.8rem 0 0; color: var(--quiet); font-size: var(--fs-meta); max-width: 70ch; }
+.dl-grid.is-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .dl-grid.is-three { grid-template-columns: 1fr; } }
 @media (max-width: 900px) { .dl-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 720px) {
   .dl-grid { grid-template-columns: 1fr; }
